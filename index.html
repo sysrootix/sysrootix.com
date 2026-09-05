@@ -166,6 +166,16 @@
   </dialog>
   <div class="toast" role="status" aria-live="polite">скопировано</div>
   <audio id="ambient" src="assets/ambient.mp3?v=5" loop autoplay preload="auto"></audio>
-  <script src="script.js"></script>
+  <script>
+    (function () {
+      var a = document.getElementById("ambient");
+      a.volume = 0.4;
+      var go = function () { a.play().catch(function () {}); };
+      go();
+      a.addEventListener("canplay", go);
+      a.addEventListener("canplaythrough", go);
+    })();
+  </script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>

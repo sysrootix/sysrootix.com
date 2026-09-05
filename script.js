@@ -273,7 +273,13 @@
   const audio = document.getElementById("ambient");
   const soundBtn = document.querySelector(".sound");
   audio.volume = 0.4;
+  audio.loop = true;
+  audio.autoplay = true;
   const wantSound = localStorage.getItem("sx.sound") !== "0";
+
+  function soundWanted() {
+    return localStorage.getItem("sx.sound") !== "0";
+  }
 
   function setSound(on) {
     soundBtn.setAttribute("aria-pressed", on ? "true" : "false");
@@ -282,11 +288,30 @@
   }
 
   async function startSound() {
+    if (!soundWanted()) return false;
+    if (!audio.paused) {
+      setSound(true);
+      return true;
+    }
     try {
       await audio.play();
       setSound(true);
       return true;
-    } catch {
+    } catch (err) {
+      if (err && err.name === "AbortError") {
+        await new Promise((r) => setTimeout(r, 60));
+        if (!audio.paused) {
+          setSound(true);
+          return true;
+        }
+        try {
+          await audio.play();
+          setSound(true);
+          return true;
+        } catch {
+          return false;
+        }
+      }
       return false;
     }
   }
@@ -304,16 +329,34 @@
   });
 
   setSound(wantSound);
+
+  function tryAutoplay() {
+    if (!soundWanted()) return;
+    startSound();
+  }
+
   if (wantSound) {
-    startSound().then((ok) => {
-      if (ok) return;
-      const unlock = () => {
-        if (localStorage.getItem("sx.sound") === "0") return;
-        startSound();
-      };
-      window.addEventListener("pointerdown", unlock, { once: true, capture: true });
-      window.addEventListener("keydown", unlock, { once: true, capture: true });
+    tryAutoplay();
+    audio.addEventListener("canplay", tryAutoplay);
+    audio.addEventListener("canplaythrough", tryAutoplay);
+    audio.addEventListener("playing", () => setSound(true));
+    window.addEventListener("load", tryAutoplay);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) tryAutoplay();
     });
+    let attempts = 0;
+    const retry = setInterval(() => {
+      attempts += 1;
+      startSound().then((ok) => {
+        if (ok || !soundWanted() || attempts >= 25) clearInterval(retry);
+      });
+    }, 350);
+    const unlock = () => {
+      if (!soundWanted()) return;
+      startSound();
+    };
+    window.addEventListener("pointerdown", unlock, { capture: true });
+    window.addEventListener("keydown", unlock, { capture: true });
   }
 
   const countEl = document.getElementById("count");
