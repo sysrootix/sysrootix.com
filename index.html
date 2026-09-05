@@ -77,11 +77,6 @@
       </a>
     </nav>
 
-    <p class="work">
-      <span class="work-k" data-i18n="project">мой проект</span>
-      <a href="https://sysrootix.watch/" rel="noopener noreferrer" target="_blank">sysrootix.watch</a>
-    </p>
-
     <section class="pay" data-i18n-aria="pay" aria-label="Крипта">
       <p class="pay-head" data-i18n="payHead">крипта · qr</p>
       <div class="pay-row">
@@ -142,6 +137,23 @@
       </div>
     </section>
 
+    <a class="watch" href="https://sysrootix.watch/" rel="noopener noreferrer" target="_blank">
+      <span class="watch-dial" id="watch-dial" aria-hidden="true">
+        <span class="watch-marks"></span>
+        <span class="watch-h"></span>
+        <span class="watch-m"></span>
+        <span class="watch-s"></span>
+        <span class="watch-cap"></span>
+      </span>
+      <span class="watch-body">
+        <span class="watch-k" data-i18n="project">мой проект</span>
+        <span class="watch-name">sysrootix.watch</span>
+      </span>
+      <svg class="watch-go" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 17 17 7M10 7h7v7" fill="none"/>
+      </svg>
+    </a>
+
     <p class="contact">
       <a href="mailto:root@sysrootix.com">root@sysrootix.com</a>
       <span class="sep" aria-hidden="true">·</span>
@@ -181,6 +193,6 @@
       a.addEventListener("canplaythrough", go);
     })();
   </script>
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

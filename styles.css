@@ -309,39 +309,6 @@ h1 span {
   fill: currentColor;
 }
 
-.work {
-  margin: 22px 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: baseline;
-  gap: 0.35rem 0.7rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
-  color: var(--muted);
-}
-
-.work-k {
-  font-size: 0.58rem;
-  letter-spacing: 0.26em;
-  color: var(--faint);
-}
-
-.work a {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(243, 240, 232, 0.2);
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.work a:hover,
-.work a:focus-visible {
-  color: var(--fg);
-  border-bottom-color: rgba(243, 240, 232, 0.5);
-  outline: none;
-}
-
 .pay {
   width: min(100%, 488px);
   margin: 28px 0 0;
@@ -444,6 +411,165 @@ h1 span {
 .copy:focus-visible {
   color: var(--fg);
   outline: none;
+}
+
+.watch {
+  width: min(100%, 488px);
+  margin: 14px 0 0;
+  padding: 14px 16px 14px 14px;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  backdrop-filter: blur(22px) saturate(1.15);
+  -webkit-backdrop-filter: blur(22px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 24px 60px rgba(0, 0, 0, 0.35);
+  transition:
+    border-color 0.45s cubic-bezier(0.22, 0.8, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+.watch:hover,
+.watch:focus-visible {
+  border-color: rgba(243, 240, 232, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    0 0 28px rgba(243, 240, 232, 0.08);
+  outline: none;
+}
+
+.watch-dial {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  border-radius: 50%;
+  border: 1px solid rgba(243, 240, 232, 0.22);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(243, 240, 232, 0.05) 0%, transparent 62%),
+    #050505;
+  box-shadow:
+    inset 0 0 16px rgba(243, 240, 232, 0.08),
+    0 0 18px rgba(243, 240, 232, 0.06);
+}
+
+.watch-marks {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from -0.7deg,
+    rgba(243, 240, 232, 0.62) 0deg 1.1deg,
+    transparent 1.1deg 30deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 62%, #000 63%);
+  mask: radial-gradient(circle, transparent 62%, #000 63%);
+}
+
+.watch-h,
+.watch-m,
+.watch-s {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 100%;
+  border-radius: 1px;
+  will-change: transform;
+}
+
+.watch-h {
+  width: 2px;
+  height: 18px;
+  margin: -18px 0 0 -1px;
+  background: var(--fg);
+  opacity: 0.88;
+  transform: rotate(var(--h, 0deg));
+}
+
+.watch-m {
+  width: 1.5px;
+  height: 24px;
+  margin: -24px 0 0 -0.75px;
+  background: var(--fg);
+  opacity: 0.72;
+  transform: rotate(var(--m, 0deg));
+}
+
+.watch-s {
+  width: 1px;
+  height: 28px;
+  margin: -22px 0 0 -0.5px;
+  background: var(--fg);
+  opacity: 0.55;
+  transform-origin: 50% calc(100% - 6px);
+  transform: rotate(var(--s, 0deg));
+}
+
+.watch-cap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: var(--fg);
+  box-shadow: 0 0 8px var(--glow);
+}
+
+.watch-k {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.watch-name {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(0.92rem, 2.6vw, 1.12rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  line-height: 1.15;
+  text-shadow: 0 0 18px var(--glow);
+}
+
+.watch-go {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--faint);
+  justify-self: end;
+  transition: color 0.35s cubic-bezier(0.22, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+.watch:hover .watch-go,
+.watch:focus-visible .watch-go {
+  color: var(--fg);
+  transform: translate(2px, -2px);
+}
+
+.watch:hover .watch-dial,
+.watch:focus-visible .watch-dial {
+  box-shadow:
+    inset 0 0 18px rgba(243, 240, 232, 0.14),
+    0 0 22px rgba(243, 240, 232, 0.12);
 }
 
 .contact {
@@ -718,12 +844,6 @@ footer {
     margin-top: 18px;
   }
 
-  .work {
-    margin-top: 16px;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-  }
-
   .pay {
     width: 100%;
     max-width: 100%;
@@ -735,6 +855,24 @@ footer {
     grid-template-columns: 4.8rem minmax(0, 1fr) 32px;
     min-height: 30px;
   }
+
+  .watch {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+    padding: 12px 12px 12px 12px;
+    grid-template-columns: 56px minmax(0, 1fr) 22px;
+    gap: 12px;
+  }
+
+  .watch-dial {
+    width: 56px;
+    height: 56px;
+  }
+
+  .watch-h { height: 14px; margin-top: -14px; }
+  .watch-m { height: 18px; margin-top: -18px; }
+  .watch-s { height: 22px; margin-top: -17px; }
 
   .contact {
     margin-top: 18px;
@@ -800,7 +938,8 @@ footer {
   .sound,
   .copy,
   .contact a,
-  .work a,
+  .watch,
+  .watch-go,
   .toast {
     transition: none;
   }
