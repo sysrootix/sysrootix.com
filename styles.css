@@ -925,9 +925,13 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .sigil,
   h1 span,
-  .echo {
+  .echo,
+  .watch-h,
+  .watch-m,
+  .watch-s {
     animation: none;
     transition: none;
+    will-change: auto;
   }
 
   .lamp {
