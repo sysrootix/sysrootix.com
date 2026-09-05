@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
   <canvas id="field" aria-hidden="true"></canvas>
@@ -137,22 +137,24 @@
       </div>
     </section>
 
-    <a class="watch" href="https://sysrootix.watch/" rel="noopener noreferrer" target="_blank">
-      <span class="watch-dial" id="watch-dial" aria-hidden="true">
-        <span class="watch-marks"></span>
-        <span class="watch-h"></span>
-        <span class="watch-m"></span>
-        <span class="watch-s"></span>
-        <span class="watch-cap"></span>
-      </span>
-      <span class="watch-body">
-        <span class="watch-k" data-i18n="project">мой проект</span>
-        <span class="watch-name">sysrootix.watch</span>
-      </span>
-      <svg class="watch-go" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M7 17 17 7M10 7h7v7" fill="none"/>
-      </svg>
-    </a>
+    <section class="pay piece">
+      <p class="pay-head" data-i18n="project">мой проект</p>
+      <a class="piece-row" href="https://sysrootix.watch/" rel="noopener noreferrer" target="_blank">
+        <span class="piece-dial" id="watch-dial" aria-hidden="true">
+          <span class="piece-marks"></span>
+          <span class="piece-h"></span>
+          <span class="piece-m"></span>
+          <span class="piece-s"></span>
+          <span class="piece-cap"></span>
+        </span>
+        <span class="piece-text">
+          <span class="piece-name">sysrootix.watch</span>
+        </span>
+        <svg class="piece-go" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 17 17 7M10 7h7v7" fill="none"/>
+        </svg>
+      </a>
+    </section>
 
     <p class="contact">
       <a href="mailto:root@sysrootix.com">root@sysrootix.com</a>
@@ -193,6 +195,6 @@
       a.addEventListener("canplaythrough", go);
     })();
   </script>
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
