@@ -7,6 +7,7 @@
       payHead: "крипта · qr",
       tg: "написать в Telegram",
       project: "мой проект",
+      projectKind: "кино · сериалы",
       views: "Просмотры",
       copy: "скопировать",
       open: "открыть",
@@ -33,6 +34,7 @@
       payHead: "crypto · qr",
       tg: "write on Telegram",
       project: "my project",
+      projectKind: "films · series",
       views: "Views",
       copy: "copy",
       open: "open",
@@ -637,37 +639,4 @@
 
   applyLang();
   setInterval(tickWhen, 15000);
-
-  const dial = document.getElementById("watch-dial");
-  let dialOn = true;
-
-  function setHands() {
-    if (!dial) return;
-    const now = new Date();
-    const s = now.getSeconds() + now.getMilliseconds() / 1000;
-    const m = now.getMinutes() + s / 60;
-    const h = (now.getHours() % 12) + m / 60;
-    dial.style.setProperty("--h", `${h * 30}deg`);
-    dial.style.setProperty("--m", `${m * 6}deg`);
-    dial.style.setProperty("--s", `${s * 6}deg`);
-  }
-
-  function dialLoop() {
-    if (!dialOn) return;
-    setHands();
-    if (!reduce) requestAnimationFrame(dialLoop);
-  }
-
-  setHands();
-  if (!reduce) requestAnimationFrame(dialLoop);
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      dialOn = false;
-      return;
-    }
-    dialOn = true;
-    setHands();
-    if (!reduce) requestAnimationFrame(dialLoop);
-  });
 })();

@@ -25,15 +25,12 @@ body {
 
 html {
   color-scheme: dark;
-  overflow-x: clip;
 }
 
 body {
   font-family: var(--font);
   min-height: 100dvh;
-  overflow-x: clip;
-  overflow-y: auto;
-  overscroll-behavior-y: none;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
 }
@@ -182,8 +179,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 72px 24px 64px;
+  justify-content: flex-start;
+  padding: 72px 24px 96px;
   text-align: center;
 }
 
@@ -421,10 +418,10 @@ h1 span {
 .piece-row,
 .piece-row:visited {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr) 36px;
+  grid-template-columns: 76px minmax(0, 1fr) 36px;
   align-items: center;
   gap: 12px;
-  min-height: 76px;
+  min-height: 64px;
   padding: 4px 4px 4px 2px;
   text-decoration: none;
   color: inherit;
@@ -438,81 +435,56 @@ h1 span {
   outline: none;
 }
 
-.piece-dial {
+.piece-screen {
   position: relative;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  width: 72px;
+  height: 44px;
+  border-radius: 2px;
   border: 1px solid rgba(243, 240, 232, 0.28);
   background:
-    radial-gradient(circle at 50% 42%, rgba(243, 240, 232, 0.08) 0%, transparent 58%),
+    linear-gradient(180deg, rgba(243, 240, 232, 0.06), transparent 42%),
     #050505;
   box-shadow:
-    inset 0 0 14px rgba(243, 240, 232, 0.1),
-    0 0 16px rgba(243, 240, 232, 0.08);
+    inset 0 0 12px rgba(243, 240, 232, 0.08),
+    0 0 14px rgba(243, 240, 232, 0.06);
+  overflow: hidden;
 }
 
-.piece-marks {
+.piece-scan {
   position: absolute;
-  inset: 4px;
-  border-radius: 50%;
-  background: repeating-conic-gradient(
-    from -0.7deg,
-    rgba(243, 240, 232, 0.7) 0deg 1.2deg,
-    transparent 1.2deg 30deg
-  );
-  -webkit-mask: radial-gradient(circle, transparent 60%, #000 61%);
-  mask: radial-gradient(circle, transparent 60%, #000 61%);
+  left: 0;
+  right: 0;
+  height: 42%;
+  background: linear-gradient(180deg, transparent, rgba(243, 240, 232, 0.1), transparent);
+  animation: scan 4.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.piece-h,
-.piece-m,
-.piece-s {
+.piece-play {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform-origin: 50% 100%;
-  border-radius: 1px;
+  width: 0;
+  height: 0;
+  margin: -7px 0 0 -5px;
+  border-style: solid;
+  border-width: 7px 0 7px 12px;
+  border-color: transparent transparent transparent var(--fg);
+  filter: drop-shadow(0 0 8px var(--glow));
+  opacity: 0.88;
 }
 
-.piece-h {
-  width: 2px;
-  height: 16px;
-  margin: -16px 0 0 -1px;
-  background: var(--fg);
-  opacity: 0.9;
-  transform: rotate(var(--h, 0deg));
+.piece-text {
+  min-width: 0;
 }
 
-.piece-m {
-  width: 1.5px;
-  height: 21px;
-  margin: -21px 0 0 -0.75px;
-  background: var(--fg);
-  opacity: 0.75;
-  transform: rotate(var(--m, 0deg));
-}
-
-.piece-s {
-  width: 1px;
-  height: 25px;
-  margin: -20px 0 0 -0.5px;
-  background: var(--fg);
-  opacity: 0.55;
-  transform-origin: 50% calc(100% - 5px);
-  transform: rotate(var(--s, 0deg));
-}
-
-.piece-cap {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  margin: -2.5px 0 0 -2.5px;
-  border-radius: 50%;
-  background: var(--fg);
-  box-shadow: 0 0 8px var(--glow);
+.piece-kind {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: var(--faint);
 }
 
 .piece-name {
@@ -542,6 +514,11 @@ h1 span {
 .piece-row:focus-visible .piece-go {
   color: var(--fg);
   transform: translate(2px, -2px);
+}
+
+.piece-row:hover .piece-play,
+.piece-row:focus-visible .piece-play {
+  opacity: 1;
 }
 
 .contact {
@@ -761,6 +738,11 @@ footer {
   50% { filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 36px rgba(255, 255, 255, 0.16)); }
 }
 
+@keyframes scan {
+  0%, 100% { transform: translateY(-80%); }
+  50% { transform: translateY(160%); }
+}
+
 @media (min-width: 1100px) {
   .poster {
     transform: translateX(-7vw);
@@ -829,19 +811,15 @@ footer {
   }
 
   .piece-row {
-    grid-template-columns: 52px minmax(0, 1fr) 32px;
-    min-height: 64px;
+    grid-template-columns: 64px minmax(0, 1fr) 32px;
+    min-height: 56px;
     gap: 10px;
   }
 
-  .piece-dial {
-    width: 52px;
-    height: 52px;
+  .piece-screen {
+    width: 64px;
+    height: 40px;
   }
-
-  .piece-h { height: 13px; margin-top: -13px; }
-  .piece-m { height: 17px; margin-top: -17px; }
-  .piece-s { height: 20px; margin-top: -16px; }
 
   .contact {
     margin-top: 18px;
@@ -895,9 +873,7 @@ footer {
   .sigil,
   h1 span,
   .echo,
-  .piece-h,
-  .piece-m,
-  .piece-s {
+  .piece-scan {
     animation: none;
     transition: none;
     will-change: auto;

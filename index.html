@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
   <canvas id="field" aria-hidden="true"></canvas>
@@ -140,15 +140,13 @@
     <section class="pay piece">
       <p class="pay-head" data-i18n="project">мой проект</p>
       <a class="piece-row" href="https://sysrootix.watch/" rel="noopener noreferrer" target="_blank">
-        <span class="piece-dial" id="watch-dial" aria-hidden="true">
-          <span class="piece-marks"></span>
-          <span class="piece-h"></span>
-          <span class="piece-m"></span>
-          <span class="piece-s"></span>
-          <span class="piece-cap"></span>
+        <span class="piece-screen" aria-hidden="true">
+          <span class="piece-scan"></span>
+          <span class="piece-play"></span>
         </span>
         <span class="piece-text">
           <span class="piece-name">sysrootix.watch</span>
+          <span class="piece-kind" data-i18n="projectKind">кино · сериалы</span>
         </span>
         <svg class="piece-go" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M7 17 17 7M10 7h7v7" fill="none"/>
@@ -195,6 +193,6 @@
       a.addEventListener("canplaythrough", go);
     })();
   </script>
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>
