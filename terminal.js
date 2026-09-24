@@ -39,9 +39,10 @@
       "<b>root</b>@<b>sysrootix</b>",
       "-----------------",
       `<span class="dim">os</span>      sysrootix.com`,
-      `<span class="dim">host</span>    ${ru() ? "владивосток, UTC+10" : "vladivostok, UTC+10"}`,
+      `<span class="dim">host</span>    ${ru() ? "хабаровск, UTC+10" : "khabarovsk, UTC+10"}`,
       `<span class="dim">shell</span>   katana-sh 6.6`,
-      `<span class="dim">role</span>    sysadmin / builder`,
+      `<span class="dim">langs</span>   typescript, rust, swift`,
+      `<span class="dim">role</span>    full-stack / devops / marketing`,
       `<span class="dim">uptime</span>  ${Math.round(performance.now() / 1000)}s ${ru() ? "(эта вкладка)" : "(this tab)"}`,
       `<span class="dim">session</span> ${sx().session ? sx().session() : "—"}`,
       `<span class="dim">visits</span>  ${sx().views ? sx().views() : 1}`,
@@ -141,7 +142,7 @@
           ["contact", "как связаться"],
           ["crypto", "поддержать"],
           ["neofetch", "инфа о системе"],
-          ["time", "время во владивостоке"],
+          ["time", "время в хабаровске"],
           ["open <имя>", "открыть ссылку (telegram, github…)"],
           ["lang / sound", "язык / звук"],
           ["clear / exit", "очистить / закрыть"],
@@ -155,7 +156,7 @@
           ["contact", "how to reach me"],
           ["crypto", "support"],
           ["neofetch", "system info"],
-          ["time", "time in vladivostok"],
+          ["time", "time in khabarovsk"],
           ["open <name>", "open a link (telegram, github…)"],
           ["lang / sound", "language / sound"],
           ["clear / exit", "clear / close"],
@@ -164,15 +165,28 @@
       print(`<span class="dim">${ru() ? "  есть и скрытые команды. ищи." : "  there are hidden commands too. dig."}</span>`);
     },
     whoami() {
-      print(ru() ? "ты — guest. а здесь живёт sysrootix: сисадмин и билдер." : "you are guest. this place belongs to sysrootix: sysadmin and builder.");
+      print(ru() ? "ты — guest. а здесь живёт sysrootix: full-stack разработчик, devops и маркетолог." : "you are guest. this place belongs to sysrootix: full-stack developer, devops and marketer.");
     },
     about() {
       print(esc(sx().t ? sx().t("aboutText") : ""));
     },
     projects() {
-      print(`  <b>sysrootix.watch</b>  <span class="dim">${ru() ? "кино и сериалы" : "films & series"}</span>  → <a href="${links.watch}" target="_blank" rel="noopener noreferrer">${links.watch}</a>`);
-      print(`  <b>katana.exe</b>       <span class="dim">${ru() ? "3d мини-игра" : "3d mini-game"}</span>    → <a href="game.html">game.html</a>`);
-      print(`  <b>sysrootix.com</b>    <span class="dim">${ru() ? "ты здесь" : "you are here"}</span>`);
+      const rows = [
+        ["5LB", ru() ? "спортпит: приложение, crm, бот, 1С" : "sports nutrition: app, crm, bot, 1C", "https://5lb.pro"],
+        ["Medusa", ru() ? "ритейл: лояльность, mini app, админка" : "retail: loyalty, mini app, admin", "https://webapp.mda-platform.top"],
+        ["sysrootix.watch", ru() ? "личный кинотеатр" : "personal cinema", links.watch],
+        ["RootDesk", ru() ? "общий inbox обращений, в работе" : "shared inbox, in progress", ""],
+        ["Omut", ru() ? "мессенджер для iOS, скоро" : "iOS messenger, soon", "https://omut.chat"],
+        ["CheckUsage", ru() ? "меню-бар macOS" : "macOS menu bar app", "https://github.com/sysrootix/check-usage"],
+        ["supermarket 3d", ru() ? "браузерный симулятор" : "browser tycoon", "https://sysrootix.github.io/supermarket-tycoon-3d/"],
+        ["polchisha", ru() ? "3d survivors в браузере" : "3d survivors in the browser", "https://sysrootix.github.io/polchisha/"],
+        ["katana.exe", ru() ? "3d мини-игра" : "3d mini-game", "game.html"],
+      ];
+      rows.forEach(([name, what, url]) => {
+        if (!url) return print(`  <b>${esc(name.padEnd(16))}</b><span class="dim">${esc(what)}</span>`);
+        const ext = url.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : "";
+        print(`  <b>${esc(name.padEnd(16))}</b><span class="dim">${esc(what.padEnd(36))}</span> <a href="${url}"${ext}>${esc(url.replace(/^https:\/\//, ""))}</a>`);
+      });
     },
     socials() {
       Object.entries(links).filter(([k]) => k !== "watch").forEach(([k, v]) => {
@@ -200,7 +214,7 @@
     neofetch,
     time() {
       const f = (tz) => new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(new Date());
-      print(`  vladivostok  ${f("Asia/Vladivostok")}\n  moscow       ${f("Europe/Moscow")}\n  utc          ${f("UTC")}`);
+      print(`  khabarovsk   ${f("Asia/Vladivostok")}\n  moscow       ${f("Europe/Moscow")}\n  utc          ${f("UTC")}`);
     },
     date() { COMMANDS.time(); },
     play() {
