@@ -1,4 +1,5 @@
 (() => {
+  document.documentElement.classList.add("js");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const I18N = {
     ru: {
@@ -20,6 +21,34 @@
       around: "на связи",
       later: "позже",
       you: "ты",
+      scroll: "листай",
+      term: "Терминал",
+      sections: "Разделы",
+      navTop: "Наверх",
+      navAbout: "обо мне",
+      navWorks: "работы",
+      navPlay: "игра",
+      navSupport: "поддержать",
+      navContact: "связь",
+      aboutTitle: "железо, код и\u00a0немного магии",
+      aboutText: "Я — sysrootix. Системный администратор и билдер из Владивостока. Поднимаю серверы, собираю сервисы и довожу идеи до продакшена — чтобы всё работало, пока остальные спят.",
+      fact1: "владивосток · дом",
+      fact2: "обычно на связи",
+      fact3: "root по призванию",
+      worksTitle: "что я строю",
+      watchText: "кино и сериалы в одном месте. свой онлайн-кинотеатр.",
+      gameTag: "новое · 3d игра",
+      gameText: "разруби баги катаной, пока они не уронили прод.",
+      termTag: "пасхалка · нажми ~",
+      termText: "почти настоящий терминал прямо на сайте. попробуй help.",
+      soonTag: "скоро",
+      soonText: "следующий проект уже собирается. следи в telegram.",
+      playText: "3D мини-игра прямо в браузере. Режь баги мышкой или пальцем, собирай комбо и не задень прод — он один.",
+      playBtn: "играть",
+      best: "рекорд",
+      contactTitle: "есть идея? пиши.",
+      hint: "~ терминал · зажми имя · кликни в пустоту",
+      phrases: ["sysadmin / builder / sysrootix", "поднимаю серверы в 3 ночи", "собираю сервисы с нуля", "режу баги катаной", "uptime важнее сна"],
       city: {
         vladivostok: "владивосток",
         moscow: "москва",
@@ -47,6 +76,34 @@
       around: "around",
       later: "later",
       you: "you",
+      scroll: "scroll",
+      term: "Terminal",
+      sections: "Sections",
+      navTop: "Top",
+      navAbout: "about",
+      navWorks: "works",
+      navPlay: "game",
+      navSupport: "support",
+      navContact: "contact",
+      aboutTitle: "hardware, code and a\u00a0little magic",
+      aboutText: "I'm sysrootix — a sysadmin and builder from Vladivostok. I spin up servers, build services and take ideas all the way to production, so things keep running while everyone else sleeps.",
+      fact1: "vladivostok · home",
+      fact2: "usually online",
+      fact3: "root by calling",
+      worksTitle: "things I build",
+      watchText: "films and series in one place. my own online cinema.",
+      gameTag: "new · 3d game",
+      gameText: "slice the bugs with a katana before they take prod down.",
+      termTag: "easter egg · press ~",
+      termText: "an almost real terminal right on the site. try help.",
+      soonTag: "soon",
+      soonText: "the next project is already compiling. watch telegram.",
+      playText: "A 3D mini-game right in the browser. Slice bugs with your mouse or finger, chain combos and don't touch prod — there's only one.",
+      playBtn: "play",
+      best: "best",
+      contactTitle: "got an idea? write.",
+      hint: "~ terminal · hold the name · click the void",
+      phrases: ["sysadmin / builder / sysrootix", "spinning up servers at 3am", "building services from scratch", "slicing bugs with a katana", "uptime over sleep"],
       city: {
         vladivostok: "vladivostok",
         moscow: "moscow",
@@ -565,6 +622,8 @@
     lang = lang === "ru" ? "en" : "ru";
     localStorage.setItem("sx.lang", lang);
     applyLang();
+    phraseIdx = 0;
+    typePhrase();
   });
 
   function sessionHex() {
@@ -629,14 +688,196 @@
   window.addEventListener("keydown", (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.target && ["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
-    if (sheet.open) return;
-    if (e.key.length !== 1 || !/\p{L}/u.test(e.key)) return;
+    if (sheet.open || !document.getElementById("term").hidden) return;
+    if (e.key.length !== 1 || !/\p{L}/u.test(e.key) || e.key === "ё" || e.key === "Ё") return;
     echoEl.textContent = e.key;
     echoEl.classList.add("on");
     clearTimeout(echoTimer);
     echoTimer = setTimeout(() => echoEl.classList.remove("on"), 1000);
   });
 
+  // ---------- typed status line ----------
+  const typedEl = document.getElementById("typed");
+  let phraseIdx = 0;
+  let typeTimer = 0;
+
+  function typePhrase() {
+    clearTimeout(typeTimer);
+    const list = t("phrases");
+    const text = list[phraseIdx % list.length];
+    if (reduce) {
+      typedEl.textContent = list[0];
+      return;
+    }
+    let i = typedEl.textContent.length;
+    const current = typedEl.textContent;
+    const erase = () => {
+      if (i > 0 && !text.startsWith(current.slice(0, i))) {
+        i -= 1;
+        typedEl.textContent = current.slice(0, i);
+        typeTimer = setTimeout(erase, 22);
+      } else {
+        write();
+      }
+    };
+    const write = () => {
+      if (i < text.length) {
+        i += 1;
+        typedEl.textContent = text.slice(0, i);
+        typeTimer = setTimeout(write, 38 + Math.random() * 50);
+      } else {
+        phraseIdx += 1;
+        typeTimer = setTimeout(typePhrase, phraseIdx % list.length === 1 ? 4200 : 2400);
+      }
+    };
+    erase();
+  }
+
+  // ---------- name decode ----------
+  function decodeName() {
+    letters.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.transitionDelay = "0s";
+        let n = 0;
+        const spin = setInterval(() => {
+          n += 1;
+          el.textContent = n > 6 ? original[i] : glyphs[(Math.random() * glyphs.length) | 0];
+          if (n > 6) clearInterval(spin);
+        }, 45);
+      }, i * 70);
+    });
+    nameEl.classList.remove("pre");
+  }
+
+  // ---------- boot sequence ----------
+  const bootEl = document.getElementById("boot");
+  const bootLog = document.getElementById("boot-log");
+
+  function finishBoot() {
+    if (!document.documentElement.classList.contains("booting")) return;
+    try { sessionStorage.setItem("sx.boot", "1"); } catch {}
+    bootEl.classList.add("out");
+    nameEl.classList.add("pre");
+    document.documentElement.classList.remove("booting");
+    requestAnimationFrame(() => requestAnimationFrame(decodeName));
+    setTimeout(() => { bootEl.style.display = "none"; }, 900);
+    window.sxScene?.burst();
+  }
+
+  function runBoot() {
+    const lines = [
+      "<b>sysrootix</b> bios v6.6.6 · (c) root",
+      "cpu0: katana-class @ 4.20 GHz ........ <b>ok</b>",
+      "mem: 64 GB snow ........................ <b>ok</b>",
+      "mounting /dev/soul on / ................ <b>ok</b>",
+      "starting sshd, nginx, dreams ........... <b>ok</b>",
+      "loading sigil.glsl (9000 particles) .... <b>ok</b>",
+      "checking prod .......................... <em>still alive</em>",
+      `session ${sessionHex()} · welcome, <b>guest</b>`,
+    ];
+    let i = 0;
+    const step = () => {
+      if (!document.documentElement.classList.contains("booting")) return;
+      bootLog.innerHTML += `${lines[i]}\n`;
+      i += 1;
+      bootEl.style.setProperty("--boot", `${Math.round((i / lines.length) * 100)}%`);
+      if (i < lines.length) setTimeout(step, 110 + Math.random() * 120);
+      else setTimeout(finishBoot, 420);
+    };
+    step();
+    bootEl.addEventListener("click", finishBoot);
+    window.addEventListener("keydown", finishBoot, { once: true });
+  }
+
+  if (document.documentElement.classList.contains("booting")) runBoot();
+
+  // ---------- reveals, progress, nav dots ----------
+  const reveals = [...document.querySelectorAll(".reveal")];
+  document.querySelectorAll(".facts, .cards").forEach((wrap) => {
+    [...wrap.children].forEach((el, i) => el.style.setProperty("--d", `${i * 0.09}s`));
+  });
+  if ("IntersectionObserver" in window && !reduce) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add("in"));
+  }
+
+  const dots = [...document.querySelectorAll(".dots a")];
+  const dotTargets = dots.map((a) => document.querySelector(a.getAttribute("href")));
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? window.scrollY / max : 0;
+    document.documentElement.style.setProperty("--progress", p.toFixed(4));
+    document.documentElement.style.setProperty("--hero", Math.min(1, window.scrollY / (window.innerHeight * 0.9)).toFixed(3));
+    const mid = window.innerHeight * 0.45;
+    let active = 0;
+    dotTargets.forEach((el, i) => {
+      if (el && el.getBoundingClientRect().top <= mid) active = i;
+    });
+    dots.forEach((a, i) => a.classList.toggle("on", i === active));
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  onScroll();
+
+  // ---------- 3D tilt cards ----------
+  if (finePointer && !reduce) {
+    document.querySelectorAll(".card").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        card.classList.add("tilting");
+        card.style.setProperty("--ry", `${(x - 0.5) * 14}deg`);
+        card.style.setProperty("--rx", `${(0.5 - y) * 12}deg`);
+        card.style.setProperty("--mx", `${x * 100}%`);
+        card.style.setProperty("--my", `${y * 100}%`);
+      });
+      card.addEventListener("pointerleave", () => {
+        card.classList.remove("tilting");
+        card.style.setProperty("--ry", "0deg");
+        card.style.setProperty("--rx", "0deg");
+      });
+    });
+  }
+
+  // ---------- magnetic mail ----------
+  document.querySelectorAll("[data-magnet]").forEach((el) => {
+    if (!finePointer || reduce) return;
+    el.addEventListener("pointermove", (e) => {
+      const r = el.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      el.style.transform = `translate(${dx * 0.08}px, ${dy * 0.25}px)`;
+    });
+    el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+    el.style.transition = "transform 0.4s cubic-bezier(0.22, 0.8, 0.2, 1), background-size 0.6s cubic-bezier(0.22, 0.8, 0.2, 1)";
+  });
+
+  // ---------- best score ----------
+  const bestEl = document.getElementById("best");
+  if (bestEl) bestEl.textContent = String(Number(localStorage.getItem("sx.katana.best") || 0));
+
+  window.sx = {
+    t,
+    get lang() { return lang; },
+    toggleLang: () => langBtn.click(),
+    toggleSound: () => soundBtn.click(),
+    copy: copyText,
+    notify,
+    session: sessionHex,
+    views: () => n,
+  };
+
   applyLang();
+  typePhrase();
   setInterval(tickWhen, 15000);
 })();

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
+  <title>katana.exe · sysrootix</title>
+  <meta name="description" content="Разруби баги катаной и не задень прод. 3D мини-игра от sysrootix.">
+  <link rel="canonical" href="https://sysrootix.com/game.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="katana.exe · sysrootix">
+  <meta property="og:description" content="Разруби баги катаной и не задень прод.">
+  <meta property="og:url" content="https://sysrootix.com/game.html">
+  <meta property="og:image" content="https://sysrootix.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="modulepreload" href="assets/vendor/three.module.min.js">
+  <link rel="stylesheet" href="game.css?v=1">
+</head>
+<body>
+  <canvas id="game" aria-hidden="true"></canvas>
+  <canvas id="trail" aria-hidden="true"></canvas>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+  <div class="slowmo" id="slowmo" aria-hidden="true"></div>
+  <div class="pops" id="pops" aria-hidden="true"></div>
+
+  <header class="hud">
+    <a class="back" href="./" aria-label="sysrootix.com">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none"/></svg>
+      <span>sysrootix</span>
+    </a>
+    <div class="score" aria-live="polite">
+      <b id="score">0</b>
+      <span><span data-t="best">рекорд</span> <i id="best">0</i></span>
+    </div>
+    <div class="hud-r">
+      <div class="lives" id="lives" aria-label="uptime"><i></i><i></i><i></i></div>
+      <button type="button" class="mute" id="mute" aria-pressed="false" aria-label="sound">♪</button>
+    </div>
+  </header>
+
+  <section class="screen" id="start">
+    <p class="kicker">sysrootix / 03</p>
+    <h1 class="logo"><span class="glitch" data-text="katana.exe">katana.exe</span></h1>
+    <p class="sub" data-t="sub">режь баги. не трогай прод.</p>
+    <ul class="legend">
+      <li><i class="lg-bug"></i><span data-t="lgBug">баг · +10 · упустишь — минус жизнь</span></li>
+      <li><i class="lg-packet"></i><span data-t="lgPacket">пакет · +5</span></li>
+      <li><i class="lg-core"></i><span data-t="lgCore">ядро · +50 · замедляет время</span></li>
+      <li><i class="lg-prod"></i><span data-t="lgProd">prod · не резать!</span></li>
+    </ul>
+    <button type="button" class="btn" id="go"><span data-t="start">начать</span></button>
+    <p class="how" data-t="how">веди мышкой или пальцем, чтобы резать · 3 и больше за взмах — комбо</p>
+  </section>
+
+  <section class="screen" id="over" hidden>
+    <p class="kicker" id="over-why">prod down</p>
+    <h2 class="big" id="final">0</h2>
+    <p class="sub" id="over-best"></p>
+    <div class="row">
+      <button type="button" class="btn" id="again"><span data-t="again">ещё раз</span></button>
+      <button type="button" class="btn ghost" id="share"><span data-t="share">поделиться</span></button>
+    </div>
+    <a class="home" href="./" data-t="home">← на главную</a>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <audio id="music" src="assets/ambient.mp3?v=5" loop preload="none"></audio>
+  <script type="module" src="game.js?v=1"></script>
+</body>
+</html>
