@@ -49,7 +49,7 @@ Don't publish client-internal numbers, client contacts, server addresses or anyt
 
 ## Style
 
-Black and cream monochrome (`--fg: #f3f0e8`), katana / snow / pentagram imagery, lowercase UI text, fonts Unbounded + Space Grotesk + JetBrains Mono. The only accent is ember red `#ff4a3d`, used sparingly. Must look good on phones (check 390×844) and respect `prefers-reduced-motion`.
+Black and cream monochrome (`--fg: #f3f0e8`), katana / snow / pentagram imagery, lowercase UI text, fonts Unbounded + Space Grotesk + JetBrains Mono. Colour comes only from the per-section accent (`--accent`: ember, ice blue, mint, sakura pink) and the matching particle palettes; ember red `#ff4a3d` is the brand accent and the katana.exe game colour. Keep everything else monochrome. Must look good on phones (check 390×844) and respect `prefers-reduced-motion`.
 
 ## Layout of the works section
 
