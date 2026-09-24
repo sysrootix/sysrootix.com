@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="modulepreload" href="assets/vendor/three.module.min.js">
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
   <script>
     try {
       if (!sessionStorage.getItem("sx.boot") && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -113,7 +113,7 @@
     <section class="block about" id="about" data-shape="1">
       <p class="kicker"><b>01</b><span data-i18n="navAbout">обо мне</span></p>
       <h2 class="title reveal" data-i18n="aboutTitle">код, серверы и&nbsp;немного магии</h2>
-      <p class="lead reveal" data-i18n="aboutText">Я — sysrootix, full-stack разработчик из Хабаровска. Собираю продукты целиком: витрина, мобильное приложение, бэкенд на Rust и Node, CRM, интеграции с 1С — и сам держу серверы и выкладку. А ещё маркетинг: лендинги, боты, промо и аналитика, чтобы продукт дошёл до людей.</p>
+      <p class="lead reveal" data-i18n="aboutText">Я — sysrootix, full-stack разработчик из Хабаровска. Работаю с розничными сетями в Хабаровске и других городах и собираю продукты целиком: витрина, мобильное приложение, бэкенд на Rust и Node, CRM, интеграции с 1С — и сам держу серверы и выкладку. А ещё маркетинг: лендинги, боты, промо и аналитика, чтобы продукт дошёл до людей.</p>
       <div class="facts">
         <div class="fact reveal">
           <b>UTC+10</b>
@@ -154,10 +154,24 @@
           <span class="card-art art-mark" aria-hidden="true"><b data-mark="medusa">medusa</b><span class="mark-sub">loyalty · mini app · admin · ios</span></span>
           <span class="card-tag" data-i18n="mdaTag">клиент · ритейл · живой</span>
           <span class="card-name">Medusa</span>
-          <span class="card-text" data-i18n="mdaText">платформа для сети магазинов: лояльность, бронь в магазине, telegram mini app, админка, приложение и лендинги. рядом — RootDesk, общий inbox обращений.</span>
+          <span class="card-text" data-i18n="mdaText">платформа для сети магазинов: лояльность, бронь в магазине, telegram mini app, админка, приложение и лендинги.</span>
           <span class="chips"><i>node</i><i>react</i><i>postgres</i><i>swift</i><i>mini app</i></span>
           <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
         </a>
+        <div class="card card-static reveal">
+          <span class="card-glare" aria-hidden="true"></span>
+          <span class="card-art art-inbox" aria-hidden="true">
+            <span class="inbox-row"><b>tg</b><i></i></span>
+            <span class="inbox-row"><b>mail</b><i></i></span>
+            <span class="inbox-row"><b>site</b><i></i></span>
+            <span class="inbox-row"><b>app</b><i></i></span>
+            <span class="inbox-one">1 ticket</span>
+          </span>
+          <span class="card-tag" data-i18n="rdTag">в работе · внутренний инструмент → saas</span>
+          <span class="card-name">RootDesk</span>
+          <span class="card-text" data-i18n="rdText">общий inbox: обращения из всех каналов собираются в одну карточку. сначала для своей команды, дальше — как saas.</span>
+          <span class="chips"><i>rust</i><i>postgres</i><i>redis</i><i>next.js</i><i>docker</i></span>
+        </div>
         <a class="card reveal" href="https://sysrootix.watch/" rel="noopener noreferrer" target="_blank">
           <span class="card-glare" aria-hidden="true"></span>
           <span class="card-art art-watch" aria-hidden="true">
@@ -184,17 +198,33 @@
           <span class="chips"><i>swift</i><i>rust</i></span>
           <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
         </a>
+        <a class="card reveal" href="https://github.com/sysrootix/check-usage" rel="noopener noreferrer" target="_blank">
+          <span class="card-glare" aria-hidden="true"></span>
+          <span class="card-art art-menubar" aria-hidden="true">
+            <span class="mb-bar"><i></i><b>◔ 62%</b></span>
+            <span class="mb-pop">
+              <span class="mb-row"><span>claude</span><em style="--v:.62"></em></span>
+              <span class="mb-row"><span>codex</span><em style="--v:.35"></em></span>
+              <span class="mb-row"><span>cursor</span><em style="--v:.8"></em></span>
+            </span>
+          </span>
+          <span class="card-tag" data-i18n="cuTag">open source · macOS</span>
+          <span class="card-name">CheckUsage</span>
+          <span class="card-text" data-i18n="cuText">меню-бар для macOS: сколько лимита осталось у установленных AI-инструментов, без отдельного логина.</span>
+          <span class="chips"><i>swift 6</i><i>swiftui</i><i>macOS 14+</i></span>
+          <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+        </a>
       </div>
       <p class="more-head reveal" data-i18n="moreHead">ещё поменьше</p>
       <div class="minis">
-        <a class="mini reveal" href="https://github.com/sysrootix/check-usage" rel="noopener noreferrer" target="_blank">
-          <span class="mini-name">CheckUsage</span>
-          <span class="mini-text" data-i18n="cuText">меню-бар macOS: остаток лимитов AI-инструментов</span>
-          <span class="mini-stack">swift 6</span>
-        </a>
         <a class="mini reveal" href="https://sysrootix.github.io/supermarket-tycoon-3d/" rel="noopener noreferrer" target="_blank">
           <span class="mini-name" data-i18n="smName">Мой Супермаркет 3D</span>
           <span class="mini-text" data-i18n="smText">браузерный симулятор магазина: ферма, цеха, касса</span>
+          <span class="mini-stack">three.js · pwa</span>
+        </a>
+        <a class="mini reveal" href="https://sysrootix.github.io/polchisha/" rel="noopener noreferrer" target="_blank">
+          <span class="mini-name" data-i18n="plName">Полчища</span>
+          <span class="mini-text" data-i18n="plText">3D survivors в браузере: продержись 20 минут против орды</span>
           <span class="mini-stack">three.js · pwa</span>
         </a>
         <a class="mini reveal" href="game.html">
@@ -352,8 +382,8 @@
       a.addEventListener("canplaythrough", go);
     })();
   </script>
-  <script src="script.js?v=9"></script>
-  <script src="terminal.js?v=2"></script>
+  <script src="script.js?v=10"></script>
+  <script src="terminal.js?v=3"></script>
   <script type="module" src="scene.js?v=1"></script>
 </body>
 </html>

@@ -175,12 +175,15 @@
         ["5LB", ru() ? "спортпит: приложение, crm, бот, 1С" : "sports nutrition: app, crm, bot, 1C", "https://5lb.pro"],
         ["Medusa", ru() ? "ритейл: лояльность, mini app, админка" : "retail: loyalty, mini app, admin", "https://webapp.mda-platform.top"],
         ["sysrootix.watch", ru() ? "личный кинотеатр" : "personal cinema", links.watch],
+        ["RootDesk", ru() ? "общий inbox обращений, в работе" : "shared inbox, in progress", ""],
         ["Omut", ru() ? "мессенджер для iOS, скоро" : "iOS messenger, soon", "https://omut.chat"],
         ["CheckUsage", ru() ? "меню-бар macOS" : "macOS menu bar app", "https://github.com/sysrootix/check-usage"],
         ["supermarket 3d", ru() ? "браузерный симулятор" : "browser tycoon", "https://sysrootix.github.io/supermarket-tycoon-3d/"],
+        ["polchisha", ru() ? "3d survivors в браузере" : "3d survivors in the browser", "https://sysrootix.github.io/polchisha/"],
         ["katana.exe", ru() ? "3d мини-игра" : "3d mini-game", "game.html"],
       ];
       rows.forEach(([name, what, url]) => {
+        if (!url) return print(`  <b>${esc(name.padEnd(16))}</b><span class="dim">${esc(what)}</span>`);
         const ext = url.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : "";
         print(`  <b>${esc(name.padEnd(16))}</b><span class="dim">${esc(what.padEnd(36))}</span> <a href="${url}"${ext}>${esc(url.replace(/^https:\/\//, ""))}</a>`);
       });
