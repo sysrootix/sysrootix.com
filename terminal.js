@@ -39,9 +39,9 @@
       "<b>root</b>@<b>sysrootix</b>",
       "-----------------",
       `<span class="dim">os</span>      sysrootix.com`,
-      `<span class="dim">host</span>    ${ru() ? "владивосток, UTC+10" : "vladivostok, UTC+10"}`,
+      `<span class="dim">host</span>    ${ru() ? "хабаровск, UTC+10" : "khabarovsk, UTC+10"}`,
       `<span class="dim">shell</span>   katana-sh 6.6`,
-      `<span class="dim">role</span>    sysadmin / builder`,
+      `<span class="dim">role</span>    full-stack / devops / marketing`,
       `<span class="dim">uptime</span>  ${Math.round(performance.now() / 1000)}s ${ru() ? "(эта вкладка)" : "(this tab)"}`,
       `<span class="dim">session</span> ${sx().session ? sx().session() : "—"}`,
       `<span class="dim">visits</span>  ${sx().views ? sx().views() : 1}`,
@@ -141,7 +141,7 @@
           ["contact", "как связаться"],
           ["crypto", "поддержать"],
           ["neofetch", "инфа о системе"],
-          ["time", "время во владивостоке"],
+          ["time", "время в хабаровске"],
           ["open <имя>", "открыть ссылку (telegram, github…)"],
           ["lang / sound", "язык / звук"],
           ["clear / exit", "очистить / закрыть"],
@@ -155,7 +155,7 @@
           ["contact", "how to reach me"],
           ["crypto", "support"],
           ["neofetch", "system info"],
-          ["time", "time in vladivostok"],
+          ["time", "time in khabarovsk"],
           ["open <name>", "open a link (telegram, github…)"],
           ["lang / sound", "language / sound"],
           ["clear / exit", "clear / close"],
@@ -164,7 +164,7 @@
       print(`<span class="dim">${ru() ? "  есть и скрытые команды. ищи." : "  there are hidden commands too. dig."}</span>`);
     },
     whoami() {
-      print(ru() ? "ты — guest. а здесь живёт sysrootix: сисадмин и билдер." : "you are guest. this place belongs to sysrootix: sysadmin and builder.");
+      print(ru() ? "ты — guest. а здесь живёт sysrootix: full-stack разработчик, devops и маркетолог." : "you are guest. this place belongs to sysrootix: full-stack developer, devops and marketer.");
     },
     about() {
       print(esc(sx().t ? sx().t("aboutText") : ""));
@@ -200,7 +200,7 @@
     neofetch,
     time() {
       const f = (tz) => new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(new Date());
-      print(`  vladivostok  ${f("Asia/Vladivostok")}\n  moscow       ${f("Europe/Moscow")}\n  utc          ${f("UTC")}`);
+      print(`  khabarovsk   ${f("Asia/Vladivostok")}\n  moscow       ${f("Europe/Moscow")}\n  utc          ${f("UTC")}`);
     },
     date() { COMMANDS.time(); },
     play() {
