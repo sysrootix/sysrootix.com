@@ -41,6 +41,7 @@
       `<span class="dim">os</span>      sysrootix.com`,
       `<span class="dim">host</span>    ${ru() ? "хабаровск, UTC+10" : "khabarovsk, UTC+10"}`,
       `<span class="dim">shell</span>   katana-sh 6.6`,
+      `<span class="dim">langs</span>   typescript, rust, swift`,
       `<span class="dim">role</span>    full-stack / devops / marketing`,
       `<span class="dim">uptime</span>  ${Math.round(performance.now() / 1000)}s ${ru() ? "(эта вкладка)" : "(this tab)"}`,
       `<span class="dim">session</span> ${sx().session ? sx().session() : "—"}`,
@@ -170,9 +171,19 @@
       print(esc(sx().t ? sx().t("aboutText") : ""));
     },
     projects() {
-      print(`  <b>sysrootix.watch</b>  <span class="dim">${ru() ? "кино и сериалы" : "films & series"}</span>  → <a href="${links.watch}" target="_blank" rel="noopener noreferrer">${links.watch}</a>`);
-      print(`  <b>katana.exe</b>       <span class="dim">${ru() ? "3d мини-игра" : "3d mini-game"}</span>    → <a href="game.html">game.html</a>`);
-      print(`  <b>sysrootix.com</b>    <span class="dim">${ru() ? "ты здесь" : "you are here"}</span>`);
+      const rows = [
+        ["5LB", ru() ? "спортпит: приложение, crm, бот, 1С" : "sports nutrition: app, crm, bot, 1C", "https://5lb.pro"],
+        ["Medusa", ru() ? "ритейл: лояльность, mini app, админка" : "retail: loyalty, mini app, admin", "https://webapp.mda-platform.top"],
+        ["sysrootix.watch", ru() ? "личный кинотеатр" : "personal cinema", links.watch],
+        ["Omut", ru() ? "мессенджер для iOS, скоро" : "iOS messenger, soon", "https://omut.chat"],
+        ["CheckUsage", ru() ? "меню-бар macOS" : "macOS menu bar app", "https://github.com/sysrootix/check-usage"],
+        ["supermarket 3d", ru() ? "браузерный симулятор" : "browser tycoon", "https://sysrootix.github.io/supermarket-tycoon-3d/"],
+        ["katana.exe", ru() ? "3d мини-игра" : "3d mini-game", "game.html"],
+      ];
+      rows.forEach(([name, what, url]) => {
+        const ext = url.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : "";
+        print(`  <b>${esc(name.padEnd(16))}</b><span class="dim">${esc(what.padEnd(36))}</span> <a href="${url}"${ext}>${esc(url.replace(/^https:\/\//, ""))}</a>`);
+      });
     },
     socials() {
       Object.entries(links).filter(([k]) => k !== "watch").forEach(([k, v]) => {

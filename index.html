@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="modulepreload" href="assets/vendor/three.module.min.js">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9">
   <script>
     try {
       if (!sessionStorage.getItem("sx.boot") && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -113,25 +113,25 @@
     <section class="block about" id="about" data-shape="1">
       <p class="kicker"><b>01</b><span data-i18n="navAbout">обо мне</span></p>
       <h2 class="title reveal" data-i18n="aboutTitle">код, серверы и&nbsp;немного магии</h2>
-      <p class="lead reveal" data-i18n="aboutText">Я — sysrootix. Full-stack разработчик из Хабаровска. Пишу фронтенд и бэкенд, сам поднимаю и настраиваю серверы — по сути devops, — а ещё занимаюсь маркетингом: умею не только собрать продукт, но и довести его до людей.</p>
+      <p class="lead reveal" data-i18n="aboutText">Я — sysrootix, full-stack разработчик из Хабаровска. Собираю продукты целиком: витрина, мобильное приложение, бэкенд на Rust и Node, CRM, интеграции с 1С — и сам держу серверы и выкладку. А ещё маркетинг: лендинги, боты, промо и аналитика, чтобы продукт дошёл до людей.</p>
       <div class="facts">
         <div class="fact reveal">
           <b>UTC+10</b>
           <span data-i18n="fact1">хабаровск · дом</span>
         </div>
         <div class="fact reveal">
-          <b>10—23</b>
-          <span data-i18n="fact2">обычно на связи</span>
+          <b>36+</b>
+          <span data-i18n="fact2">проектов за плечами</span>
         </div>
         <div class="fact reveal">
-          <b>3 в 1</b>
-          <span data-i18n="fact3">код · серверы · маркетинг</span>
+          <b>TS · Rust</b>
+          <span data-i18n="fact3">основные языки</span>
         </div>
       </div>
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          <span>frontend</span><i>✦</i><span>backend</span><i>✦</i><span>full-stack</span><i>✦</i><span>devops</span><i>✦</i><span>linux</span><i>✦</i><span>docker</span><i>✦</i><span>nginx</span><i>✦</i><span>ci/cd</span><i>✦</i><span>databases</span><i>✦</i><span>marketing</span><i>✦</i><span>analytics</span><i>✦</i><span>automation</span><i>✦</i>
-          <span>frontend</span><i>✦</i><span>backend</span><i>✦</i><span>full-stack</span><i>✦</i><span>devops</span><i>✦</i><span>linux</span><i>✦</i><span>docker</span><i>✦</i><span>nginx</span><i>✦</i><span>ci/cd</span><i>✦</i><span>databases</span><i>✦</i><span>marketing</span><i>✦</i><span>analytics</span><i>✦</i><span>automation</span><i>✦</i>
+          <span>typescript</span><i>✦</i><span>react</span><i>✦</i><span>react native</span><i>✦</i><span>expo</span><i>✦</i><span>swift</span><i>✦</i><span>rust</span><i>✦</i><span>axum</span><i>✦</i><span>node.js</span><i>✦</i><span>postgres</span><i>✦</i><span>redis</span><i>✦</i><span>docker</span><i>✦</i><span>nginx</span><i>✦</i><span>caddy</span><i>✦</i><span>three.js</span><i>✦</i><span>telegram mini apps</span><i>✦</i><span>1С</span><i>✦</i><span>seo</span><i>✦</i><span>marketing</span><i>✦</i>
+          <span>typescript</span><i>✦</i><span>react</span><i>✦</i><span>react native</span><i>✦</i><span>expo</span><i>✦</i><span>swift</span><i>✦</i><span>rust</span><i>✦</i><span>axum</span><i>✦</i><span>node.js</span><i>✦</i><span>postgres</span><i>✦</i><span>redis</span><i>✦</i><span>docker</span><i>✦</i><span>nginx</span><i>✦</i><span>caddy</span><i>✦</i><span>three.js</span><i>✦</i><span>telegram mini apps</span><i>✦</i><span>1С</span><i>✦</i><span>seo</span><i>✦</i><span>marketing</span><i>✦</i>
         </div>
       </div>
     </section>
@@ -140,6 +140,24 @@
       <p class="kicker"><b>02</b><span data-i18n="navWorks">работы</span></p>
       <h2 class="title reveal" data-i18n="worksTitle">что я строю</h2>
       <div class="cards">
+        <a class="card reveal" href="https://5lb.pro" rel="noopener noreferrer" target="_blank">
+          <span class="card-glare" aria-hidden="true"></span>
+          <span class="card-art art-mark" aria-hidden="true"><b data-mark="5LB">5LB</b><span class="mark-sub">app · pwa · crm · bot · 1c</span></span>
+          <span class="card-tag" data-i18n="lbTag">клиент · ритейл · живой</span>
+          <span class="card-name">5LB</span>
+          <span class="card-text" data-i18n="lbText">сеть магазинов спортпита под ключ: мобильное приложение, pwa-кабинет, crm, бот для сотрудников, бонусы, заказы и связка с 1С.</span>
+          <span class="chips"><i>expo</i><i>rust</i><i>node</i><i>postgres</i><i>1С</i></span>
+          <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+        </a>
+        <a class="card reveal" href="https://webapp.mda-platform.top" rel="noopener noreferrer" target="_blank">
+          <span class="card-glare" aria-hidden="true"></span>
+          <span class="card-art art-mark" aria-hidden="true"><b data-mark="medusa">medusa</b><span class="mark-sub">loyalty · mini app · admin · ios</span></span>
+          <span class="card-tag" data-i18n="mdaTag">клиент · ритейл · живой</span>
+          <span class="card-name">Medusa</span>
+          <span class="card-text" data-i18n="mdaText">платформа для сети магазинов: лояльность, бронь в магазине, telegram mini app, админка, приложение и лендинги. рядом — RootDesk, общий inbox обращений.</span>
+          <span class="chips"><i>node</i><i>react</i><i>postgres</i><i>swift</i><i>mini app</i></span>
+          <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+        </a>
         <a class="card reveal" href="https://sysrootix.watch/" rel="noopener noreferrer" target="_blank">
           <span class="card-glare" aria-hidden="true"></span>
           <span class="card-art art-watch" aria-hidden="true">
@@ -149,37 +167,46 @@
           </span>
           <span class="card-tag" data-i18n="project">мой проект</span>
           <span class="card-name">sysrootix.watch</span>
-          <span class="card-text" data-i18n="watchText">кино и сериалы в одном месте. свой онлайн-кинотеатр.</span>
+          <span class="card-text" data-i18n="watchText">личный кинотеатр: каталог, плееры, друзья и совместный просмотр.</span>
+          <span class="chips"><i>react 19</i><i>rust · axum</i><i>postgres</i><i>pwa</i></span>
           <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
         </a>
-        <a class="card reveal" href="game.html">
+        <a class="card reveal" href="https://omut.chat" rel="noopener noreferrer" target="_blank">
           <span class="card-glare" aria-hidden="true"></span>
-          <span class="card-art art-game" aria-hidden="true">
-            <img src="assets/katana.webp" alt="" loading="lazy">
-            <span class="slash"></span>
+          <span class="card-art art-chat" aria-hidden="true">
+            <span class="bubble in">ты где?</span>
+            <span class="bubble out">в омуте</span>
+            <span class="bubble in typing"><i></i><i></i><i></i></span>
           </span>
-          <span class="card-tag" data-i18n="gameTag">новое · 3d игра</span>
-          <span class="card-name">katana.exe</span>
-          <span class="card-text" data-i18n="gameText">разруби баги катаной, пока они не уронили прод.</span>
+          <span class="card-tag" data-i18n="omutTag">сейчас делаю · запуск в октябре</span>
+          <span class="card-name">Omut</span>
+          <span class="card-text" data-i18n="omutText">мессенджер для iOS: свой чат и Telegram в одном приложении.</span>
+          <span class="chips"><i>swift</i><i>rust</i></span>
           <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
         </a>
-        <button class="card reveal js-term" type="button">
-          <span class="card-glare" aria-hidden="true"></span>
-          <span class="card-art art-term" aria-hidden="true">
-            <span class="mini-term">root@sysrootix:~# <i>_</i></span>
-          </span>
-          <span class="card-tag" data-i18n="termTag">пасхалка · нажми ~</span>
-          <span class="card-name">root@sysrootix</span>
-          <span class="card-text" data-i18n="termText">почти настоящий терминал прямо на сайте. попробуй help.</span>
-          <svg class="card-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+      </div>
+      <p class="more-head reveal" data-i18n="moreHead">ещё поменьше</p>
+      <div class="minis">
+        <a class="mini reveal" href="https://github.com/sysrootix/check-usage" rel="noopener noreferrer" target="_blank">
+          <span class="mini-name">CheckUsage</span>
+          <span class="mini-text" data-i18n="cuText">меню-бар macOS: остаток лимитов AI-инструментов</span>
+          <span class="mini-stack">swift 6</span>
+        </a>
+        <a class="mini reveal" href="https://sysrootix.github.io/supermarket-tycoon-3d/" rel="noopener noreferrer" target="_blank">
+          <span class="mini-name" data-i18n="smName">Мой Супермаркет 3D</span>
+          <span class="mini-text" data-i18n="smText">браузерный симулятор магазина: ферма, цеха, касса</span>
+          <span class="mini-stack">three.js · pwa</span>
+        </a>
+        <a class="mini reveal" href="game.html">
+          <span class="mini-name">katana.exe</span>
+          <span class="mini-text" data-i18n="gameText">разруби баги катаной, пока они не уронили прод</span>
+          <span class="mini-stack">three.js</span>
+        </a>
+        <button class="mini reveal js-term" type="button">
+          <span class="mini-name">root@sysrootix</span>
+          <span class="mini-text" data-i18n="termText">терминал прямо на сайте. нажми ~ и введи help</span>
+          <span class="mini-stack">bash-ish</span>
         </button>
-        <div class="card card-soon reveal">
-          <span class="card-glare" aria-hidden="true"></span>
-          <span class="card-art art-soon" aria-hidden="true"><span class="noise"></span><b>compiling…</b></span>
-          <span class="card-tag" data-i18n="soonTag">скоро</span>
-          <span class="card-name">next.build</span>
-          <span class="card-text" data-i18n="soonText">следующий проект уже собирается. следи в telegram.</span>
-        </div>
       </div>
     </section>
 
@@ -325,8 +352,8 @@
       a.addEventListener("canplaythrough", go);
     })();
   </script>
-  <script src="script.js?v=8"></script>
-  <script src="terminal.js?v=1"></script>
+  <script src="script.js?v=9"></script>
+  <script src="terminal.js?v=2"></script>
   <script type="module" src="scene.js?v=1"></script>
 </body>
 </html>
