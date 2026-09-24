@@ -46,9 +46,9 @@
       omutTag: "сейчас делаю · запуск в октябре",
       omutText: "мессенджер для iOS: свой чат и Telegram в одном приложении.",
       moreHead: "ещё поменьше",
+      linkSite: "сайт",
+      linkApp: "приложение",
       cuText: "меню-бар для macOS: сколько лимита осталось у установленных AI-инструментов, без отдельного логина.",
-      smName: "Мой Супермаркет 3D",
-      smText: "браузерный симулятор магазина: ферма, цеха, касса",
       rdTag: "в работе · внутренний инструмент → saas",
       rdText: "общий inbox: обращения из всех каналов собираются в одну карточку. сначала для своей команды, дальше — как saas.",
       cuTag: "open source · macOS",
@@ -112,9 +112,9 @@
       omutTag: "building now · launching in october",
       omutText: "an iOS messenger: its own chat and Telegram in one app.",
       moreHead: "smaller things",
+      linkSite: "site",
+      linkApp: "app",
       cuText: "a macOS menu bar app: how much limit your installed AI tools have left, no extra login.",
-      smName: "My Supermarket 3D",
-      smText: "a browser store tycoon: farm, workshops, checkout",
       rdTag: "in progress · internal tool → saas",
       rdText: "a shared inbox: requests from every channel land in one card. built for my team first, then as saas.",
       cuTag: "open source · macOS",
@@ -162,6 +162,11 @@
 
       function reverseFrame(now) {
         if (!reversing) return;
+        if (video.dataset.parked) {
+          reversing = false;
+          dir = 1;
+          return;
+        }
         const dt = Math.min(0.05, (now - last) / 1000);
         last = now;
         const next = video.currentTime - dt;
@@ -292,10 +297,6 @@
       }
     }
     if (!reduce && finePointer) {
-      lampX += (lampTX - lampX) * 0.07;
-      lampY += (lampTY - lampY) * 0.07;
-      document.documentElement.style.setProperty("--lx", `${lampX}%`);
-      document.documentElement.style.setProperty("--ly", `${lampY}%`);
       sparks.forEach((s, i) => {
         s.x += (ptrX - s.x) * s.lag;
         s.y += (ptrY - s.y) * s.lag;
@@ -307,8 +308,33 @@
     }
   }
 
+  // The 2D snow is only a fallback: scene.js draws snow in WebGL and stops this loop.
+  let fieldOff = false;
+  window.sxField = {
+    stop() {
+      fieldOff = true;
+      running = false;
+      field.style.display = "none";
+    },
+  };
+
+  // Spotlight follows the cursor by moving one composited layer, not by restyling the page.
+  const lampEl = document.querySelector(".lamp");
+  let lampRaf = 0;
+  lampX = window.innerWidth * 0.5;
+  lampY = window.innerHeight * 0.42;
+  lampTX = lampX;
+  lampTY = lampY;
+  function lampStep() {
+    lampX += (lampTX - lampX) * 0.14;
+    lampY += (lampTY - lampY) * 0.14;
+    lampEl.style.transform = `translate3d(${lampX.toFixed(1)}px, ${lampY.toFixed(1)}px, 0)`;
+    lampRaf = Math.abs(lampTX - lampX) + Math.abs(lampTY - lampY) > 0.6 ? requestAnimationFrame(lampStep) : 0;
+  }
+  lampEl.style.transform = `translate3d(${lampX}px, ${lampY}px, 0)`;
+
   function loop() {
-    if (!running) return;
+    if (!running || fieldOff) return;
     paint();
     if (!reduce) requestAnimationFrame(loop);
   }
@@ -320,6 +346,7 @@
   if (!reduce) requestAnimationFrame(loop);
 
   window.addEventListener("resize", () => {
+    if (fieldOff) return;
     resize();
     spawn();
     if (reduce) paint();
@@ -332,8 +359,9 @@
     ptrX = e.clientX;
     ptrY = e.clientY;
     if (finePointer) {
-      lampTX = (e.clientX / w) * 100;
-      lampTY = (e.clientY / h) * 100;
+      lampTX = e.clientX;
+      lampTY = e.clientY;
+      if (!lampRaf) lampRaf = requestAnimationFrame(lampStep);
       if (!sparksReady) {
         sparks.forEach((s) => {
           s.x = ptrX;
@@ -347,7 +375,7 @@
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       running = false;
-    } else if (!reduce) {
+    } else if (!reduce && !fieldOff) {
       running = true;
       requestAnimationFrame(loop);
     }
@@ -399,15 +427,120 @@
     }
   }
 
+  // Web Audio graph: element → low-pass (muffles under overlays) → gain (fades) → analyser (visuals).
+  // Built on the first user gesture, because an AudioContext created earlier starts suspended.
+  let actx = null;
+  let lowpass = null;
+  let gainNode = null;
+  let analyser = null;
+  let bins = null;
+  let slowBass = 0;
+  let lastKick = 0;
+  let meterRaf = 0;
+  const eqBars = [...soundBtn.querySelectorAll(".eq i")];
+
+  function buildGraph() {
+    if (actx) {
+      if (actx.state === "suspended") actx.resume();
+      return;
+    }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    try {
+      actx = new AC();
+      const src = actx.createMediaElementSource(audio);
+      lowpass = actx.createBiquadFilter();
+      lowpass.type = "lowpass";
+      lowpass.frequency.value = 20000;
+      lowpass.Q.value = 0.7;
+      gainNode = actx.createGain();
+      analyser = actx.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.72;
+      bins = new Uint8Array(analyser.frequencyBinCount);
+      src.connect(lowpass).connect(gainNode).connect(analyser).connect(actx.destination);
+      if (actx.state === "suspended") actx.resume();
+      if (!audio.paused) startMeter();
+    } catch {
+      actx = null;
+    }
+  }
+
+  function band(from, to) {
+    let sum = 0;
+    for (let i = from; i < to; i += 1) sum += bins[i];
+    return sum / ((to - from) * 255);
+  }
+
+  function meter(now) {
+    meterRaf = 0;
+    if (!analyser || audio.paused) {
+      sxAudio.current = null;
+      soundBtn.classList.remove("live");
+      return;
+    }
+    analyser.getByteFrequencyData(bins);
+    const bass = band(1, 5);
+    const mid = band(6, 30);
+    const high = band(30, 90);
+    slowBass += (bass - slowBass) * 0.05;
+    const kick = bass - slowBass > 0.09 && now - lastKick > 220;
+    if (kick) lastKick = now;
+    sxAudio.current = { bass, mid, high, kick };
+    soundBtn.classList.add("live");
+    const levels = [bass, mid * 1.4, high * 2.2, (mid + bass) * 0.8];
+    eqBars.forEach((bar, i) => {
+      bar.style.transform = `scaleY(${Math.max(0.15, Math.min(1, levels[i])).toFixed(2)})`;
+    });
+    meterRaf = requestAnimationFrame(meter);
+  }
+
+  function startMeter() {
+    if (!meterRaf && analyser && !reduce) meterRaf = requestAnimationFrame(meter);
+  }
+
+  function fadeTo(value, seconds) {
+    if (!gainNode) return;
+    const now = actx.currentTime;
+    gainNode.gain.cancelScheduledValues(now);
+    gainNode.gain.setValueAtTime(gainNode.gain.value, now);
+    gainNode.gain.linearRampToValueAtTime(value, now + seconds);
+  }
+
+  const sxAudio = {
+    current: null,
+    muffle(on) {
+      if (!lowpass) return;
+      const now = actx.currentTime;
+      lowpass.frequency.cancelScheduledValues(now);
+      lowpass.frequency.setValueAtTime(lowpass.frequency.value, now);
+      lowpass.frequency.exponentialRampToValueAtTime(on ? 650 : 20000, now + (on ? 0.5 : 0.9));
+    },
+  };
+  window.sxAudio = sxAudio;
+
+  audio.addEventListener("playing", startMeter);
+
   soundBtn.addEventListener("click", async (e) => {
     e.stopPropagation();
+    buildGraph();
     const on = soundBtn.getAttribute("aria-pressed") !== "true";
     if (on) {
+      if (gainNode) gainNode.gain.value = 0;
+      setSound(true);
       const ok = await startSound();
       if (!ok) setSound(false);
+      else fadeTo(1, 2.2);
     } else {
-      audio.pause();
       setSound(false);
+      if (gainNode) {
+        fadeTo(0, 0.45);
+        setTimeout(() => {
+          if (soundBtn.getAttribute("aria-pressed") !== "true") audio.pause();
+        }, 480);
+      } else {
+        audio.pause();
+      }
     }
   });
 
@@ -436,6 +569,7 @@
     }, 350);
     const unlock = () => {
       if (!soundWanted()) return;
+      buildGraph();
       startSound();
     };
     window.addEventListener("pointerdown", unlock, { capture: true });
@@ -507,6 +641,7 @@
     if (typeof sheet.showModal === "function") {
       document.body.style.overflow = "hidden";
       sheet.showModal();
+      sxAudio.muffle(true);
     }
   }
 
@@ -518,6 +653,7 @@
   document.getElementById("qr-close").addEventListener("click", () => sheet.close());
   sheet.addEventListener("close", () => {
     document.body.style.overflow = "";
+    sxAudio.muffle(false);
   });
   sheet.addEventListener("click", (e) => {
     const r = sheet.getBoundingClientRect();
@@ -833,38 +969,99 @@
     reveals.forEach((el) => el.classList.add("in"));
   }
 
+  // Scroll work is batched into one frame and touches only the few elements that react to it.
   const dots = [...document.querySelectorAll(".dots a")];
   const dotTargets = dots.map((a) => document.querySelector(a.getAttribute("href")));
-  function onScroll() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const p = max > 0 ? window.scrollY / max : 0;
-    document.documentElement.style.setProperty("--progress", p.toFixed(4));
-    document.documentElement.style.setProperty("--hero", Math.min(1, window.scrollY / (window.innerHeight * 0.9)).toFixed(3));
-    const mid = window.innerHeight * 0.45;
-    let active = 0;
-    dotTargets.forEach((el, i) => {
-      if (el && el.getBoundingClientRect().top <= mid) active = i;
-    });
-    dots.forEach((a, i) => a.classList.toggle("on", i === active));
+  const progressBar = document.querySelector(".progress span");
+  const heroBound = [...document.querySelectorAll(".void, .blade, .cue")];
+  let dotTops = [];
+  let maxScroll = 1;
+  let scrollQueued = false;
+  let lastHero = -1;
+  let lastActive = -1;
+  let parked = false;
+
+  function measureScroll() {
+    dotTops = dotTargets.map((el) => (el ? el.getBoundingClientRect().top + window.scrollY : 0));
+    maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    applyScroll();
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
-  onScroll();
+
+  function parkVideos(off) {
+    if (off === parked || reduce) return;
+    parked = off;
+    videos.forEach((v) => {
+      if (off) {
+        v.dataset.parked = "1";
+        v.pause();
+      } else {
+        delete v.dataset.parked;
+        v.play().catch(() => {});
+      }
+      v.style.visibility = off ? "hidden" : "";
+    });
+  }
+
+  function applyScroll() {
+    scrollQueued = false;
+    const y = window.scrollY;
+    progressBar.style.transform = `scaleX(${Math.min(1, y / maxScroll).toFixed(4)})`;
+    const hero = Math.min(1, y / (window.innerHeight * 0.9));
+    if (Math.abs(hero - lastHero) > 0.004 || (hero === 1) !== (lastHero === 1)) {
+      lastHero = hero;
+      heroBound.forEach((el) => el.style.setProperty("--hero", hero.toFixed(3)));
+      parkVideos(y > window.innerHeight * 1.15);
+    }
+    const mid = y + window.innerHeight * 0.45;
+    let active = 0;
+    dotTops.forEach((top, i) => {
+      if (top <= mid) active = i;
+    });
+    if (active !== lastActive) {
+      lastActive = active;
+      dots.forEach((d, i) => d.classList.toggle("on", i === active));
+      document.documentElement.dataset.sec = String(active);
+    }
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!scrollQueued) {
+      scrollQueued = true;
+      requestAnimationFrame(applyScroll);
+    }
+  }, { passive: true });
+  window.addEventListener("resize", measureScroll, { passive: true });
+  window.addEventListener("load", measureScroll);
+  if ("ResizeObserver" in window) new ResizeObserver(measureScroll).observe(document.body);
+  measureScroll();
 
   // ---------- 3D tilt cards ----------
   if (finePointer && !reduce) {
     document.querySelectorAll(".card").forEach((card) => {
+      let queued = false;
+      let ex = 0;
+      let ey = 0;
+      let rect = null;
+      card.addEventListener("pointerenter", () => { rect = card.getBoundingClientRect(); });
       card.addEventListener("pointermove", (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width;
-        const y = (e.clientY - r.top) / r.height;
-        card.classList.add("tilting");
-        card.style.setProperty("--ry", `${(x - 0.5) * 14}deg`);
-        card.style.setProperty("--rx", `${(0.5 - y) * 12}deg`);
-        card.style.setProperty("--mx", `${x * 100}%`);
-        card.style.setProperty("--my", `${y * 100}%`);
+        ex = e.clientX;
+        ey = e.clientY;
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          queued = false;
+          const r = rect || card.getBoundingClientRect();
+          const x = (ex - r.left) / r.width;
+          const y = (ey - r.top) / r.height;
+          card.classList.add("tilting");
+          card.style.setProperty("--ry", `${(x - 0.5) * 14}deg`);
+          card.style.setProperty("--rx", `${(0.5 - y) * 12}deg`);
+          card.style.setProperty("--mx", `${x * 100}%`);
+          card.style.setProperty("--my", `${y * 100}%`);
+        });
       });
       card.addEventListener("pointerleave", () => {
+        rect = null;
         card.classList.remove("tilting");
         card.style.setProperty("--ry", "0deg");
         card.style.setProperty("--rx", "0deg");
@@ -872,7 +1069,15 @@
     });
   }
 
-  // ---------- magnetic mail ----------
+  // Cards with two links: a click anywhere outside the buttons opens the main link.
+  document.querySelectorAll(".card-cover").forEach((cover) => {
+    cover.closest(".card").addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
+      cover.click();
+    });
+  });
+
+    // ---------- magnetic mail ----------
   document.querySelectorAll("[data-magnet]").forEach((el) => {
     if (!finePointer || reduce) return;
     el.addEventListener("pointermove", (e) => {

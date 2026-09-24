@@ -173,12 +173,11 @@
     projects() {
       const rows = [
         ["5LB", ru() ? "спортпит: приложение, crm, бот, 1С" : "sports nutrition: app, crm, bot, 1C", "https://5lb.pro"],
-        ["Medusa", ru() ? "ритейл: лояльность, mini app, админка" : "retail: loyalty, mini app, admin", "https://webapp.mda-platform.top"],
+        ["Medusa", ru() ? "ритейл: лояльность, mini app, админка" : "retail: loyalty, mini app, admin", "https://mda-medusa.ru"],
         ["sysrootix.watch", ru() ? "личный кинотеатр" : "personal cinema", links.watch],
-        ["RootDesk", ru() ? "общий inbox обращений, в работе" : "shared inbox, in progress", ""],
+        ["RootDesk", ru() ? "общий inbox обращений" : "shared inbox", "https://rootdesk.mda-platform.top/"],
         ["Omut", ru() ? "мессенджер для iOS, скоро" : "iOS messenger, soon", "https://omut.chat"],
         ["CheckUsage", ru() ? "меню-бар macOS" : "macOS menu bar app", "https://github.com/sysrootix/check-usage"],
-        ["supermarket 3d", ru() ? "браузерный симулятор" : "browser tycoon", "https://sysrootix.github.io/supermarket-tycoon-3d/"],
         ["polchisha", ru() ? "3d survivors в браузере" : "3d survivors in the browser", "https://sysrootix.github.io/polchisha/"],
         ["katana.exe", ru() ? "3d мини-игра" : "3d mini-game", "game.html"],
       ];
@@ -284,6 +283,7 @@
     lastFocus = document.activeElement;
     term.hidden = false;
     document.body.style.overflow = "hidden";
+    window.sxAudio?.muffle(true);
     if (!booted) {
       booted = true;
       print(`<span class="dim">sysrootix tty1 · ${new Date().toUTCString()}</span>`);
@@ -296,6 +296,7 @@
     if (term.hidden) return;
     term.hidden = true;
     document.body.style.overflow = "";
+    window.sxAudio?.muffle(false);
     lastFocus?.focus?.();
   }
 

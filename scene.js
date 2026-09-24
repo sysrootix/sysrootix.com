@@ -2,6 +2,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
 // Particle sigil: thousands of points that morph between shapes as the page scrolls.
 // 0 pentagram · 1 globe · 2 infrastructure lattice · 3 katana · 4 galaxy
+// Each shape has its own palette; an aurora glows behind it, snow and sakura petals fall in front,
+// and everything breathes with the background music when it plays.
 
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const coarse = window.matchMedia("(pointer: coarse)").matches;
@@ -16,17 +18,35 @@ function supportsGL() {
   }
 }
 
+// Per-shape colours: main tone and the "hot" accent sparks.
+const MAIN = [
+  [0.953, 0.941, 0.91],
+  [0.74, 0.88, 1.0],
+  [0.78, 1.0, 0.87],
+  [0.9, 0.92, 0.98],
+  [0.9, 0.8, 1.0],
+];
+const HOT = [
+  [1.0, 0.29, 0.24],
+  [0.3, 0.8, 1.0],
+  [0.45, 1.0, 0.62],
+  [1.0, 0.36, 0.26],
+  [1.0, 0.5, 0.74],
+];
+
 if (canvas && supportsGL()) {
   try {
     start();
     document.documentElement.classList.add("gl");
+    window.sxField?.stop();
   } catch (err) {
     console.warn("scene disabled", err);
   }
 }
 
 function start() {
-  const COUNT = coarse || window.innerWidth < 760 ? 5200 : 9000;
+  const small = coarse || window.innerWidth < 760;
+  const COUNT = small ? 5200 : 9000;
   const R = 1.55;
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: "high-performance" });
@@ -50,6 +70,7 @@ function start() {
   geo.setAttribute("meta", new THREE.BufferAttribute(meta, 4));
   geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 10);
 
+  const vec3s = (list) => list.map((c) => new THREE.Vector3(...c));
   const uniforms = {
     uTime: { value: 0 },
     uMorph: { value: 0 },
@@ -60,6 +81,10 @@ function start() {
     uOpacity: { value: 0 },
     uPulse: { value: 0 },
     uPulseAt: { value: new THREE.Vector3() },
+    uBeat: { value: 0 },
+    uKick: { value: 0 },
+    uMain: { value: vec3s(MAIN) },
+    uHot: { value: vec3s(HOT) },
   };
 
   const mat = new THREE.ShaderMaterial({
@@ -81,8 +106,12 @@ function start() {
       uniform float uSize;
       uniform float uPulse;
       uniform vec3 uPulseAt;
+      uniform float uBeat;
+      uniform float uKick;
+      uniform vec3 uMain[5];
+      uniform vec3 uHot[5];
       varying float vAlpha;
-      varying float vHot;
+      varying vec3 vColor;
 
       vec3 pick(float i) {
         if (i < 0.5) return position;
@@ -95,16 +124,16 @@ function start() {
       void main() {
         float m = clamp(uMorph, 0.0, 4.0);
         float i = floor(m);
+        float j = min(i + 1.0, 4.0);
         float f = clamp((m - i - meta.y * 0.35) / 0.65, 0.0, 1.0);
         f = f * f * (3.0 - 2.0 * f);
-        vec3 a = pick(i);
-        vec3 b = pick(min(i + 1.0, 4.0));
-        vec3 pos = mix(a, b, f);
+        vec3 pos = mix(pick(i), pick(j), f);
 
         float swirl = sin(f * 3.14159);
         float ph = meta.y * 6.2831;
         pos += vec3(sin(ph + uTime * 0.7), cos(ph * 1.3 + uTime * 0.5), sin(ph * 0.7 - uTime * 0.6)) * swirl * 0.9;
         pos += vec3(sin(uTime * meta.z + ph), cos(uTime * meta.z * 0.8 + ph), sin(uTime * meta.z * 0.6 + ph * 2.0)) * 0.018;
+        pos *= 1.0 + uBeat * 0.06 * meta.w;
 
         vec4 world = modelMatrix * vec4(pos, 1.0);
         vec3 d = world.xyz - uMouse;
@@ -120,23 +149,27 @@ function start() {
         vec4 mv = viewMatrix * world;
         gl_Position = projectionMatrix * mv;
         float twinkle = 0.75 + 0.25 * sin(uTime * meta.z * 2.0 + ph);
-        gl_PointSize = uSize * meta.x * uPixel * twinkle / -mv.z;
-        vAlpha = (0.35 + 0.65 * meta.w) * (0.6 + push * 1.2 + wave * 1.5);
-        vHot = step(0.955, meta.w) + push * 0.6;
+        gl_PointSize = uSize * meta.x * uPixel * twinkle * (1.0 + uBeat * 0.45) / -mv.z;
+
+        int ia = int(i);
+        int ib = int(j);
+        vec3 mainC = mix(uMain[ia], uMain[ib], f);
+        vec3 hotC = mix(uHot[ia], uHot[ib], f);
+        float hot = step(0.9, meta.w) + push * 0.8 + wave * 0.6 + uKick * step(0.72, meta.w);
+        float tint = smoothstep(0.55, 1.0, meta.w) * 0.35;
+        vColor = mix(mix(mainC, hotC, tint), hotC, clamp(hot, 0.0, 1.0));
+        vAlpha = (0.35 + 0.65 * meta.w) * (0.6 + push * 1.2 + wave * 1.5 + uBeat * 0.5);
       }
     `,
     fragmentShader: /* glsl */ `
       uniform float uOpacity;
       varying float vAlpha;
-      varying float vHot;
+      varying vec3 vColor;
       void main() {
         float d = length(gl_PointCoord - 0.5);
         float a = smoothstep(0.5, 0.0, d);
         a = pow(a, 1.8);
-        vec3 cream = vec3(0.953, 0.941, 0.910);
-        vec3 ember = vec3(1.0, 0.24, 0.22);
-        vec3 col = mix(cream, ember, clamp(vHot, 0.0, 1.0));
-        gl_FragColor = vec4(col, a * vAlpha * uOpacity);
+        gl_FragColor = vec4(vColor, a * vAlpha * uOpacity);
       }
     `,
   });
@@ -161,11 +194,167 @@ function start() {
     return line;
   });
 
+  // Aurora: one full-screen triangle, a few sines per pixel, tinted by the current shape.
+  const auroraU = {
+    uTime: { value: 0 },
+    uColA: { value: new THREE.Vector3(...MAIN[0]) },
+    uColB: { value: new THREE.Vector3(...HOT[0]) },
+    uAmp: { value: 0 },
+    uAspect: { value: 1 },
+  };
+  const auroraGeo = new THREE.BufferGeometry();
+  auroraGeo.setAttribute("position", new THREE.BufferAttribute(new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]), 3));
+  const aurora = new THREE.Mesh(auroraGeo, new THREE.ShaderMaterial({
+    uniforms: auroraU,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexShader: /* glsl */ `
+      varying vec2 vP;
+      void main() {
+        vP = position.xy;
+        gl_Position = vec4(position.xy, 0.0, 1.0);
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      uniform float uTime;
+      uniform vec3 uColA;
+      uniform vec3 uColB;
+      uniform float uAmp;
+      uniform float uAspect;
+      varying vec2 vP;
+      void main() {
+        vec2 p = vP;
+        p.x *= uAspect;
+        float t = uTime * 0.06;
+        float a = sin(p.x * 1.3 + t * 3.0 + sin(p.y * 1.7 - t * 2.0)) + sin(p.y * 2.1 - t * 2.5 + sin(p.x * 1.1 + t));
+        float b = sin(length(p - vec2(sin(t * 1.7) * 0.8, cos(t * 1.3) * 0.5)) * 2.4 - t * 4.0);
+        float band = smoothstep(0.3, 1.9, a + b * 0.6);
+        float vign = smoothstep(1.7, 0.1, length(p * vec2(0.62, 1.0)));
+        vec3 col = mix(uColA, uColB, smoothstep(-1.0, 1.0, b));
+        float k = band * vign * uAmp;
+        gl_FragColor = vec4(col, k);
+      }
+    `,
+  }));
+  aurora.frustumCulled = false;
+  aurora.renderOrder = -1;
+  scene.add(aurora);
+
+  // Snow and sakura petals, animated entirely on the GPU in screen space.
+  const FLAKES = small ? 110 : 190;
+  const snowGeo = new THREE.BufferGeometry();
+  const sPos = new Float32Array(FLAKES * 3);
+  const sMeta = new Float32Array(FLAKES * 4);
+  for (let i = 0; i < FLAKES; i += 1) {
+    sPos.set([Math.random() * 2.4 - 1.2, Math.random() * 2.4, Math.random()], i * 3);
+    const petal = Math.random() < 0.22;
+    sMeta.set([petal ? 9 + Math.random() * 7 : 1.5 + Math.random() * 3.5, 0.04 + Math.random() * 0.08, Math.random() * 6.28, petal ? 1 : 0], i * 4);
+  }
+  snowGeo.setAttribute("position", new THREE.BufferAttribute(sPos, 3));
+  snowGeo.setAttribute("meta", new THREE.BufferAttribute(sMeta, 4));
+  const snowU = { uTime: { value: 0 }, uPixel: { value: 1 }, uPar: { value: new THREE.Vector2() }, uScroll: { value: 0 }, uBeat: { value: 0 } };
+  const snow = new THREE.Points(snowGeo, new THREE.ShaderMaterial({
+    uniforms: snowU,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexShader: /* glsl */ `
+      attribute vec4 meta;
+      uniform float uTime;
+      uniform float uPixel;
+      uniform vec2 uPar;
+      uniform float uScroll;
+      uniform float uBeat;
+      varying float vPetal;
+      varying float vAngle;
+      varying float vDepth;
+      void main() {
+        float depth = position.z;
+        float fall = uTime * meta.y * (0.5 + depth);
+        float y = 1.2 - mod(position.y + fall + uScroll * (0.2 + depth * 0.5), 2.4);
+        float x = position.x + sin(uTime * 0.4 + meta.z) * 0.04 * (1.0 + meta.w * 2.0) + uPar.x * (0.02 + depth * 0.05);
+        y += uPar.y * (0.02 + depth * 0.04);
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        gl_PointSize = meta.x * uPixel * (0.55 + depth * 0.7) * (1.0 + uBeat * 0.25);
+        vPetal = meta.w;
+        vAngle = meta.z + uTime * (0.6 + meta.y * 6.0);
+        vDepth = depth;
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      varying float vPetal;
+      varying float vAngle;
+      varying float vDepth;
+      void main() {
+        vec2 p = gl_PointCoord - 0.5;
+        float a;
+        vec3 col;
+        if (vPetal > 0.5) {
+          float c = cos(vAngle);
+          float s = sin(vAngle);
+          p = mat2(c, -s, s, c) * p;
+          float d = length(p * vec2(1.0, 1.9));
+          a = smoothstep(0.34, 0.26, d) * (1.0 - smoothstep(0.02, 0.1, abs(p.x)) * step(0.1, p.y) * 0.9);
+          col = mix(vec3(1.0, 0.72, 0.84), vec3(1.0, 0.92, 0.95), smoothstep(-0.2, 0.2, p.y));
+          a *= 0.55;
+        } else {
+          a = pow(smoothstep(0.5, 0.0, length(p)), 1.6) * 0.8;
+          col = vec3(1.0);
+        }
+        gl_FragColor = vec4(col, a * (0.35 + vDepth * 0.65));
+      }
+    `,
+  }));
+  snow.frustumCulled = false;
+  scene.add(snow);
+
+  // A short glowing trail behind the cursor (desktop only).
+  const TRAIL = 8;
+  const trailPos = new Float32Array(TRAIL * 3);
+  const trailGeo = new THREE.BufferGeometry();
+  trailGeo.setAttribute("position", new THREE.BufferAttribute(trailPos, 3));
+  const trailIdx = new Float32Array(TRAIL).map((_, i) => i);
+  trailGeo.setAttribute("idx", new THREE.BufferAttribute(trailIdx, 1));
+  const trailU = { uPixel: { value: 1 }, uColor: { value: new THREE.Vector3(...HOT[0]) }, uShow: { value: 0 } };
+  const trail = new THREE.Points(trailGeo, new THREE.ShaderMaterial({
+    uniforms: trailU,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexShader: /* glsl */ `
+      attribute float idx;
+      uniform float uPixel;
+      varying float vK;
+      void main() {
+        vK = 1.0 - idx / 8.0;
+        gl_Position = vec4(position.xy, 0.0, 1.0);
+        gl_PointSize = (3.0 + vK * 7.0) * uPixel;
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      uniform vec3 uColor;
+      uniform float uShow;
+      varying float vK;
+      void main() {
+        float a = pow(smoothstep(0.5, 0.0, length(gl_PointCoord - 0.5)), 1.5);
+        gl_FragColor = vec4(mix(uColor, vec3(1.0), vK * 0.6), a * vK * 0.8 * uShow);
+      }
+    `,
+  }));
+  trail.frustumCulled = false;
+  scene.add(trail);
+  const trailPts = Array.from({ length: TRAIL }, (_, i) => ({ x: 0, y: 0, lag: 0.34 - i * 0.03 }));
+
   const sections = [...document.querySelectorAll("[data-shape]")];
+  let centers = [];
   let targetMorph = 0;
   let morph = 0;
-  let pointer = { x: 0, y: 0, active: false };
-  let tilt = { x: 0, y: 0 };
+  const pointer = { x: 0, y: 0, active: false, fresh: true };
+  const tilt = { x: 0, y: 0 };
   let repel = 0;
   let pulse = 0;
   let spin = 0;
@@ -174,16 +363,28 @@ function start() {
   let fadeIn = 0;
   let heroFade = 0;
   let layout = { heroX: 0, heroY: 0, sideX: 0 };
+  let dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 1.5);
+  let drawCount = COUNT;
+  let beat = 0;
+  let kick = 0;
+  const colA = new THREE.Vector3();
+  const colB = new THREE.Vector3();
+
+  function applySize() {
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    uniforms.uPixel.value = dpr;
+    snowU.uPixel.value = dpr;
+    trailU.uPixel.value = dpr;
+  }
 
   function resize() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 1.75);
-    renderer.setPixelRatio(dpr);
-    renderer.setSize(w, h, false);
+    applySize();
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    uniforms.uPixel.value = dpr;
+    auroraU.uAspect.value = w / h;
     const aspect = w / h;
     const s = Math.max(0.52, Math.min(1, aspect * 0.78));
     group.scale.setScalar(s);
@@ -200,12 +401,20 @@ function start() {
     }
   }
 
-  function readScroll() {
-    const mid = window.scrollY + window.innerHeight * 0.5;
-    const centers = sections.map((el) => {
+  // Section positions are measured only when the layout changes, never on scroll.
+  function measure() {
+    centers = sections.map((el) => {
       const r = el.getBoundingClientRect();
       return { c: r.top + window.scrollY + r.height * 0.5, k: Number(el.dataset.shape) };
     });
+    readScroll();
+  }
+
+  function readScroll() {
+    const y = window.scrollY;
+    const mid = y + window.innerHeight * 0.5;
+    heroFade = Math.min(1, y / (window.innerHeight * 0.9));
+    snowU.uScroll.value = y / window.innerHeight;
     if (!centers.length) return;
     if (mid <= centers[0].c) {
       targetMorph = centers[0].k;
@@ -223,7 +432,6 @@ function start() {
         }
       }
     }
-    heroFade = Math.min(1, window.scrollY / (window.innerHeight * 0.9));
   }
 
   const ndc = new THREE.Vector2();
@@ -243,23 +451,25 @@ function start() {
     pointer.y = e.clientY;
     pointer.active = true;
   }, { passive: true });
-  window.addEventListener("pointerleave", () => { pointer.active = false; });
   document.addEventListener("pointerout", (e) => {
     if (!e.relatedTarget) pointer.active = false;
   });
 
   window.addEventListener("pointerdown", (e) => {
-    if (e.target.closest("a, button, input, dialog, .term, .card, .pay")) return;
+    if (e.target.closest("a, button, input, dialog, .term, .card, .pay, .mini")) return;
     worldFromClient(e.clientX, e.clientY, uniforms.uPulseAt.value);
     pulse = 1;
   }, { passive: true });
 
-  window.addEventListener("resize", () => { resize(); readScroll(); }, { passive: true });
+  window.addEventListener("resize", () => { resize(); measure(); }, { passive: true });
   window.addEventListener("scroll", readScroll, { passive: true });
+  window.addEventListener("load", measure);
+  if ("ResizeObserver" in window) new ResizeObserver(measure).observe(document.body);
   document.addEventListener("visibilitychange", () => {
     visible = !document.hidden;
     if (visible) {
       last = performance.now();
+      perf.frames = -30;
       requestAnimationFrame(frame);
     }
   });
@@ -271,25 +481,72 @@ function start() {
     },
   };
 
+  // Adaptive quality: if frames get slow, first lower the resolution, then the particle count.
+  const perf = { frames: -60, acc: 0 };
+  function adapt(ms) {
+    perf.frames += 1;
+    if (perf.frames <= 0) return;
+    perf.acc += ms;
+    if (perf.frames < 45) return;
+    const avg = perf.acc / perf.frames;
+    perf.frames = 0;
+    perf.acc = 0;
+    if (avg < 22) return;
+    if (dpr > 1) {
+      dpr = Math.max(1, dpr - 0.25);
+      applySize();
+    } else if (drawCount > COUNT * 0.45) {
+      drawCount = Math.floor(drawCount * 0.75);
+      geo.setDrawRange(0, drawCount);
+    } else if (dpr > 0.75) {
+      dpr = 0.75;
+      applySize();
+    }
+  }
+
   function frame(now) {
     if (!visible) return;
-    const dt = Math.min(0.05, (now - last) / 1000);
+    const ms = now - last;
+    const dt = Math.min(0.05, ms / 1000);
     last = now;
+    adapt(ms);
     const time = now / 1000;
     uniforms.uTime.value = time;
+    auroraU.uTime.value = time;
+    snowU.uTime.value = time;
 
     morph += (targetMorph - morph) * Math.min(1, dt * 3.2);
     uniforms.uMorph.value = morph;
 
+    // Music: smooth bass drives size and glow, kicks flash the accent sparks.
+    const lv = window.sxAudio?.current;
+    beat += ((lv ? lv.bass : 0) - beat) * Math.min(1, dt * 12);
+    kick = Math.max(lv && lv.kick ? 1 : 0, kick - dt * 3);
+    uniforms.uBeat.value = beat;
+    uniforms.uKick.value = kick;
+    snowU.uBeat.value = beat;
+
     fadeIn = Math.min(1, fadeIn + dt * 0.6);
     const hero = heroFade;
     uniforms.uOpacity.value = fadeIn * (1 - hero * 0.45);
-    ringMat.opacity = fadeIn * 0.07 * (1 - hero * 0.5);
+    ringMat.opacity = fadeIn * (0.07 + beat * 0.12) * (1 - hero * 0.5);
+
+    const ia = Math.min(4, Math.floor(morph));
+    const ib = Math.min(4, ia + 1);
+    const f = morph - ia;
+    colA.fromArray(MAIN[ia]).lerp(new THREE.Vector3(...MAIN[ib]), f);
+    colB.fromArray(HOT[ia]).lerp(new THREE.Vector3(...HOT[ib]), f);
+    auroraU.uColA.value.copy(colA).multiplyScalar(0.45);
+    auroraU.uColB.value.copy(colB);
+    auroraU.uAmp.value = fadeIn * (0.1 + hero * 0.05 + beat * 0.08);
+    ringMat.color.setRGB(colA.x, colA.y, colA.z);
+    trailU.uColor.value.copy(colB);
 
     const px = pointer.active ? pointer.x / window.innerWidth - 0.5 : 0;
     const py = pointer.active ? pointer.y / window.innerHeight - 0.5 : 0;
     tilt.x += (py * 0.5 - tilt.x) * dt * 2.5;
     tilt.y += (px * 0.7 - tilt.y) * dt * 2.5;
+    snowU.uPar.value.set(-tilt.y * 2, tilt.x * 2);
     spin += dt * (morph > 0.5 ? 0.16 : 0.07);
     const sway = morph < 0.5 ? Math.sin(time * 0.35) * 0.28 : spin;
     // Katana tilts forward a touch; the galaxy disc leans towards the viewer and spins on its own axis.
@@ -301,12 +558,30 @@ function start() {
     group.position.y = layout.heroY * (1 - k);
     rings[0].rotation.z = time * 0.08;
     rings[1].rotation.z = -time * 0.06;
+    rings.forEach((r) => r.scale.setScalar(1 + beat * 0.06));
 
     repel += ((pointer.active && !coarse ? 1 : 0) - repel) * dt * 3;
     uniforms.uRepel.value = repel;
     if (pointer.active) {
       worldFromClient(pointer.x, pointer.y, hit);
       uniforms.uMouse.value.lerp(hit, Math.min(1, dt * 10));
+    }
+
+    if (!coarse) {
+      const tx = (pointer.x / window.innerWidth) * 2 - 1;
+      const ty = -(pointer.y / window.innerHeight) * 2 + 1;
+      if (pointer.fresh && pointer.active) {
+        trailPts.forEach((p) => { p.x = tx; p.y = ty; });
+        pointer.fresh = false;
+      }
+      trailPts.forEach((p, i) => {
+        p.x += (tx - p.x) * p.lag;
+        p.y += (ty - p.y) * p.lag;
+        trailPos[i * 3] = p.x;
+        trailPos[i * 3 + 1] = p.y;
+      });
+      trailGeo.attributes.position.needsUpdate = true;
+      trailU.uShow.value += ((pointer.active ? 1 : 0) - trailU.uShow.value) * Math.min(1, dt * 6);
     }
 
     pulse = Math.max(0, pulse - dt * 0.9);
@@ -317,7 +592,7 @@ function start() {
   }
 
   resize();
-  readScroll();
+  measure();
   if (reduce) {
     fadeIn = 1;
     frame(performance.now());
