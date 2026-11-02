@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Никита Терехин — резюме</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@400&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 11mm 14mm 10mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 400 9pt/1.4 "Onest", system-ui, sans-serif; color: #111; background: #fff; }
+  .page { max-width: 180mm; margin: 0 auto; }
+  h1 { font: 400 25pt/1 "Unbounded", sans-serif; letter-spacing: -0.04em; margin: 0 0 5pt; }
+  .role { font-size: 12.5pt; font-weight: 500; margin: 0 0 6pt; }
+  .meta { margin: 0; color: #444; }
+  .meta a { color: #111; }
+  .lead { margin: 10pt 0 0; font-size: 10pt; line-height: 1.5; }
+  h2 { font: 400 11pt/1.2 "Unbounded", sans-serif; letter-spacing: -0.02em; margin: 12pt 0 5pt; color: #ff4a3d; }
+  h3 { font-size: 10.4pt; font-weight: 600; margin: 0; }
+  .when { color: #555; font-weight: 400; }
+  ul { margin: 4pt 0 0; padding-left: 13pt; }
+  li { margin: 0 0 2.4pt; }
+  li b { font-weight: 600; }
+  .nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; margin: 10pt 0 0; }
+  .nums div { background: #f2f1ee; padding: 7pt 8pt; }
+  .nums b { display: block; font: 400 14pt/1.1 "Unbounded", sans-serif; letter-spacing: -0.03em; }
+  .nums span { font-size: 8.4pt; color: #444; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18pt; }
+  .stack p { margin: 0 0 3pt; }
+  .stack b { font-weight: 600; }
+  a { color: inherit; }
+  .keep { break-inside: avoid; }
+  @media screen { body { background: #e9e8e4; } .page { background: #fff; padding: 16mm; margin: 24px auto; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Никита Терехин</h1>
+  <p class="role">Техлид / руководитель IT · full-stack · AI-native</p>
+  <p class="meta">Хабаровск, UTC+10 · удалённо или на месте · <a href="https://t.me/sysrootix">t.me/sysrootix</a> · <a href="https://github.com/sysrootix">github.com/sysrootix</a> · <a href="https://sysrootix.com/portfolio/">sysrootix.com/portfolio</a></p>
+
+  <p class="lead">Один веду всю цифровую часть двух розничных сетей, 5LB и Medusa: приложения, бэкенды, CRM, 1С, сайты, видеоаналитику и серверы. Работаю как AI-native инженер: проектирую, ставлю задачи и отвечаю за прод, а код пишет команда AI-агентов по моей схеме, с тестами, ревью и CI. Один человек — объём целого отдела.</p>
+
+  <div class="nums">
+    <div><b>65 000+</b><span>клиентов в двух базах лояльности</span></div>
+    <div><b>50+</b><span>магазинов на моих системах</span></div>
+    <div><b>20+</b><span>систем в проде</span></div>
+    <div><b>×4</b><span>броней с сайта после SEO на ИИ</span></div>
+  </div>
+
+  <h2>Опыт</h2>
+  <div class="keep">
+    <h3>5LB (сеть спортпита) и Medusa (сеть магазинов + франшиза) · технический руководитель, весь IT <span class="when">· 07.2024 — сейчас</span></h3>
+    <ul>
+      <li><b>Приложения и лояльность.</b> Приложение 5LB на Expo для iOS, Android и веба с обновлениями по воздуху. Rust-бэкенд (axum, sqlx, Postgres): бонусы, колесо, рефералка, партнёрка, вход по коду с каскадом Telegram → SMS. «Твоя Medusa»: нативный iOS на SwiftUI с виджетом и Siri, Android на Expo, Telegram Mini App и PWA, 54 000 пользователей.</li>
+      <li><b>CRM и маркетинг.</b> CRM 5LB (Express, Prisma, React): RFM-аудитории, рассылки и автоцепочки, сгорание бонусов, база знаний, 820 тестов. CRM Medusa с контрольными группами и «лестницей возврата». Рассылки до 52 000 получателей за раз.</li>
+      <li><b>1С и касса.</b> Расширения УТ 11: персональные скидки из CRM прямо на кассе, обмен с сайтами на Bitrix (каталог из CRM, живые остатки, бронь), 9 витрин для Power BI, ежедневные отчёты закупки и сроков годности.</li>
+      <li><b>ИИ в бизнесе.</b> MCP-агенты в обеих CRM: работают с правами сотрудника, опасные действия подтверждает человек. Общий inbox поддержки RootDesk (Rust, Next.js, 410 тестов) с ИИ-ответами. SEO-агент вместо платного подрядчика: за первый месяц визиты +18%, брони с сайта 21 → 87.</li>
+      <li><b>Видеоаналитика.</b> Камеры в магазинах считают посетителей и подходы продавцов (YOLO11, TensorRT): время кадра 78 → 43 мс на одной видеокарте.</li>
+      <li><b>Аналитика.</b> Нашёл по данным, почему просели чеки сети; после исправления +300 чеков в день.</li>
+      <li><b>Инфраструктура.</b> 20 репозиториев на потоке PR → CI → выкат с автооткатом. Бэкапы с проверкой восстановления, закрытие уязвимостей, доступы.</li>
+    </ul>
+  </div>
+
+  <h2>Свои продукты</h2>
+  <ul>
+    <li><b>Bandito</b> — команда AI-агентов на Mac и сервере пользователя: Rust-демон, нативные приложения для Mac и iPhone, 9 языков. 20 релизов за первую неделю. <a href="https://bandito.dev">bandito.dev</a></li>
+    <li><b>Omut</b> — мессенджер: Telegram, WhatsApp и свой чат в одном приложении (Swift, TDLib, Rust), около 400 тестов. <a href="https://omut.chat">omut.chat</a></li>
+    <li><b>claude-agent-team</b> — открытая схема работы с агентами: старшая модель проектирует, младшие пишут, ревьюер проверяет, хуки не дают сдать красное.</li>
+    <li><b>sysrootix.watch</b> (кинотеатр: React 19, Rust), <b>CheckUsage</b> и <b>FreeBright</b> (утилиты для macOS, Swift).</li>
+  </ul>
+
+  <div class="two">
+    <div class="stack">
+      <h2>Стек</h2>
+      <p><b>Языки:</b> TypeScript, Rust, Swift, Python, PHP, 1С</p>
+      <p><b>Бэкенд:</b> axum, sqlx, Express, Fastify, Prisma, FastAPI</p>
+      <p><b>Фронт и мобильные:</b> React, Next.js, Vite, Expo / React Native, SwiftUI, Telegram Mini Apps</p>
+      <p><b>Данные:</b> PostgreSQL, Redis, Power BI</p>
+      <p><b>Инфраструктура:</b> Docker, GitHub Actions, nginx, Caddy, Cloudflare, Linux</p>
+      <p><b>ИИ:</b> Claude API, MCP, агенты, YOLO, TensorRT</p>
+    </div>
+    <div>
+      <h2>Как работаю</h2>
+      <ul>
+        <li>Закрываю полный цикл сам: от разговора с бизнесом до прода и поддержки.</li>
+        <li>Деньги, бонусы и 1С продумываю до кода: транзакции, порядок, откат.</li>
+        <li>Сначала тесты, потом код. Ничего не уходит в прод без CI и ревью.</li>
+        <li>Считаю результат в цифрах бизнеса: чеки, брони, скорость, а не в задачах.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
