@@ -1469,6 +1469,28 @@ html:not(.js) .reveal {
   transform: translateX(4px);
 }
 
+/* hero: кнопка на /portfolio — контурная, чтобы не спорить с именем */
+.btn-cv {
+  margin-top: 26px;
+  padding: 14px 24px;
+  font-size: 0.78rem;
+  color: var(--fg);
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(243, 240, 232, 0.5);
+  box-shadow: none;
+}
+
+.btn-cv::after {
+  background: linear-gradient(110deg, transparent 30%, rgba(243, 240, 232, 0.18) 50%, transparent 70%);
+}
+
+.btn-cv:hover,
+.btn-cv:focus-visible {
+  color: #000;
+  background: var(--fg);
+  box-shadow: 0 0 50px rgba(243, 240, 232, 0.3);
+}
+
 .best {
   font-family: var(--mono);
   font-size: 0.7rem;
