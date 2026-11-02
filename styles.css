@@ -273,6 +273,8 @@ html.booting .boot {
   position: static;
 }
 
+a.chip { text-decoration: none; }
+
 .js-term.chip {
   font-family: var(--mono);
   letter-spacing: 0;
