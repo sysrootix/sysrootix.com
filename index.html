@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="modulepreload" href="assets/vendor/three.module.min.js">
-  <link rel="stylesheet" href="styles.css?v=12">
+  <link rel="stylesheet" href="styles.css?v=13">
   <script>
     try {
       if (!sessionStorage.getItem("sx.boot") && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -106,6 +106,10 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12.2s0-3.4-.4-5c-.2-.9-.9-1.6-1.8-1.8C19.1 5 12 5 12 5s-7.1 0-8.8.4c-.9.2-1.6.9-1.8 1.8C1 8.8 1 12.2 1 12.2s0 3.4.4 5c.2.9.9 1.6 1.8 1.8C4.9 19.4 12 19.4 12 19.4s7.1 0 8.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-5 .4-5zM9.8 15.6V8.8l6.2 3.4-6.2 3.4z"/></svg>
         </a>
       </nav>
+      <a class="btn btn-cv" href="portfolio/">
+        <span data-i18n="cvBtn">портфолио и резюме</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none"/></svg>
+      </a>
       <a class="cue" href="#about">
         <span data-i18n="scroll">листай</span>
         <i aria-hidden="true"></i>
@@ -382,7 +386,7 @@
       a.addEventListener("canplaythrough", go);
     })();
   </script>
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=12"></script>
   <script src="terminal.js?v=4"></script>
   <script type="module" src="scene.js?v=2"></script>
 </body>
