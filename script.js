@@ -776,6 +776,9 @@
     const soundOn = soundBtn.getAttribute("aria-pressed") === "true";
     soundBtn.setAttribute("aria-label", soundOn ? t("soundOff") : t("soundOn"));
     sessEl.setAttribute("aria-label", t("sess"));
+    document.querySelectorAll('a[href^="portfolio/"]').forEach((a) => {
+      a.setAttribute("href", lang === "en" ? "portfolio/en/" : "portfolio/");
+    });
     tickWhen();
   }
 

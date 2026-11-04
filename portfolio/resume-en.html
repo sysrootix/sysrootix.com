@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Nikita Terekhin — résumé</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@400&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 11mm 14mm 10mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 400 9pt/1.4 "Onest", system-ui, sans-serif; color: #111; background: #fff; }
+  .page { max-width: 180mm; margin: 0 auto; }
+  h1 { font: 400 25pt/1 "Unbounded", sans-serif; letter-spacing: -0.04em; margin: 0 0 5pt; }
+  .role { font-size: 12.5pt; font-weight: 500; margin: 0 0 6pt; }
+  .meta { margin: 0; color: #444; }
+  .meta a { color: #111; }
+  .lead { margin: 10pt 0 0; font-size: 10pt; line-height: 1.5; }
+  h2 { font: 400 11pt/1.2 "Unbounded", sans-serif; letter-spacing: -0.02em; margin: 12pt 0 5pt; color: #ff4a3d; }
+  h3 { font-size: 10.4pt; font-weight: 600; margin: 0; }
+  .when { color: #555; font-weight: 400; }
+  ul { margin: 4pt 0 0; padding-left: 13pt; }
+  li { margin: 0 0 2.4pt; }
+  li b { font-weight: 600; }
+  .nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; margin: 10pt 0 0; }
+  .nums div { background: #f2f1ee; padding: 7pt 8pt; }
+  .nums b { display: block; font: 400 14pt/1.1 "Unbounded", sans-serif; letter-spacing: -0.03em; }
+  .nums span { font-size: 8.4pt; color: #444; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18pt; }
+  .stack p { margin: 0 0 3pt; }
+  .stack b { font-weight: 600; }
+  a { color: inherit; }
+  .keep { break-inside: avoid; }
+  @media screen { body { background: #e9e8e4; } .page { background: #fff; padding: 16mm; margin: 24px auto; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Nikita Terekhin</h1>
+  <p class="role">Tech lead / head of IT · full-stack · AI-native</p>
+  <p class="meta">Khabarovsk, Russia, UTC+10 · remote or on site · <a href="https://t.me/sysrootix">t.me/sysrootix</a> · <a href="https://github.com/sysrootix">github.com/sysrootix</a> · <a href="https://sysrootix.com/portfolio/en/">sysrootix.com/portfolio/en</a></p>
+
+  <p class="lead">I run the whole digital side of two retail chains, 5LB and Medusa, on my own: apps, backends, CRM, 1C, websites, video analytics and servers. I work as an AI-native engineer: I design, set the tasks and own production, while a team of AI agents writes the code to my process, with tests, review and CI. One person, the output of a whole department.</p>
+
+  <div class="nums">
+    <div><b>65,000+</b><span>customers in two loyalty databases</span></div>
+    <div><b>50+</b><span>stores running on my systems</span></div>
+    <div><b>20+</b><span>systems in production</span></div>
+    <div><b>×4</b><span>website reservations after AI-run SEO</span></div>
+  </div>
+
+  <h2>Experience</h2>
+  <div class="keep">
+    <h3>5LB (sports nutrition chain) and Medusa (store chain + franchise) · technical lead, all of IT <span class="when">· 07.2024 — present</span></h3>
+    <ul>
+      <li><b>Apps and loyalty.</b> 5LB app on Expo for iOS, Android and web with over-the-air updates. Rust backend (axum, sqlx, Postgres): bonuses, prize wheel, referrals, partner program, login codes with a Telegram → SMS cascade. Medusa app: native SwiftUI iOS app with a widget and Siri, Android on Expo, Telegram Mini App and PWA, 54,000 users.</li>
+      <li><b>CRM and marketing.</b> 5LB CRM (Express, Prisma, React): RFM audiences, campaigns and automated flows, bonus expiry, a knowledge base, 820 tests. Medusa CRM with control groups and a win-back ladder. Campaigns of up to 52,000 recipients per send.</li>
+      <li><b>1C and point of sale.</b> 1C ERP (UT 11) extensions: personal discounts from the CRM applied right at the till, sync with the Bitrix websites (catalog from the CRM, live stock, reservations), 9 data marts for Power BI, daily purchasing and expiry-date reports.</li>
+      <li><b>AI in the business.</b> MCP agents in both CRMs: they act with an employee's permissions, a human approves risky actions. RootDesk shared support inbox (Rust, Next.js, 410 tests) with AI replies. An SEO agent replaced a paid agency: in the first month visits +18%, website reservations 21 → 87.</li>
+      <li><b>Video analytics.</b> In-store cameras count visitors and staff approaches (YOLO11, TensorRT): frame time 78 → 43 ms on a single GPU.</li>
+      <li><b>Analytics.</b> Found in the data why the chain's receipt count dropped; after the fix, +300 receipts a day.</li>
+      <li><b>Infrastructure.</b> 20 repositories on a PR → CI → deploy flow with auto-rollback. Backups with restore checks, vulnerability fixes, access control.</li>
+    </ul>
+  </div>
+
+  <h2>My products</h2>
+  <ul>
+    <li><b>Bandito</b> — a team of AI agents on the user's Mac and server: Rust daemon, native apps for Mac and iPhone, 9 languages. 20 releases in the first week. <a href="https://bandito.dev">bandito.dev</a></li>
+    <li><b>Omut</b> — a messenger with Telegram, WhatsApp and its own chat in one app (Swift, TDLib, Rust), about 400 tests. <a href="https://omut.chat">omut.chat</a></li>
+    <li><b>claude-agent-team</b> — my open-source way of working with agents: a senior model designs, smaller ones write, a reviewer checks, hooks block anything red.</li>
+    <li><b>sysrootix.watch</b> (home cinema: React 19, Rust), <b>CheckUsage</b> and <b>FreeBright</b> (macOS utilities, Swift).</li>
+  </ul>
+
+  <div class="two">
+    <div class="stack">
+      <h2>Stack</h2>
+      <p><b>Languages:</b> TypeScript, Rust, Swift, Python, PHP, 1C</p>
+      <p><b>Backend:</b> axum, sqlx, Express, Fastify, Prisma, FastAPI</p>
+      <p><b>Frontend and mobile:</b> React, Next.js, Vite, Expo / React Native, SwiftUI, Telegram Mini Apps</p>
+      <p><b>Data:</b> PostgreSQL, Redis, Power BI</p>
+      <p><b>Infrastructure:</b> Docker, GitHub Actions, nginx, Caddy, Cloudflare, Linux</p>
+      <p><b>AI:</b> Claude API, MCP, agents, YOLO, TensorRT</p>
+    </div>
+    <div>
+      <h2>How I work</h2>
+      <ul>
+        <li>I own the full cycle: from talking to the business to production and support.</li>
+        <li>Money, bonuses and 1C are designed before the code: transactions, ordering, rollback.</li>
+        <li>Tests first, then code. Nothing reaches production without CI and review.</li>
+        <li>I measure results in business numbers (receipts, reservations, speed), not closed tickets.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -47,6 +47,8 @@ h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
 .nav-links { display: flex; gap: 26px; margin-left: auto; font-size: 14px; color: var(--muted); }
 .nav-links a { text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--ink); }
+.lang { font-size: 14px; color: var(--muted); text-decoration: none; padding: 8px 12px; margin-right: -14px; border-radius: 999px; transition: color 0.2s, background-color 0.2s; }
+.lang:hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); }
 
 /* hero */
 .hero { overflow: hidden; position: relative; }
@@ -226,6 +228,7 @@ h1 { font: 500 clamp(44px, 6.2vw, 84px)/1 var(--display); letter-spacing: -0.045
 @media (max-width: 1040px) {
   .nav-links { display: none; }
   .nav-in { justify-content: space-between; }
+  .lang { margin-left: auto; margin-right: -20px; }
   .hero-in { grid-template-columns: 1fr; min-height: 0; padding: 48px 0 24px; }
   .hero-visual { height: 560px; max-width: 560px; width: 100%; margin: 0 auto; }
   .stats { grid-template-columns: repeat(2, 1fr); }

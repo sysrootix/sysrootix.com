@@ -12,7 +12,8 @@
   });
 
   // Count-up for the stats row.
-  const fmt = (n) => n.toLocaleString("ru-RU").replace(/ /g, " ");
+  const loc = document.documentElement.lang === "en" ? "en-US" : "ru-RU";
+  const fmt = (n) => n.toLocaleString(loc).replace(/ /g, " ");
   const cu = io((es) => {
     for (const e of es) if (e.isIntersecting) {
       cu.unobserve(e.target);
