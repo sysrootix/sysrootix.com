@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#09090b">
+  <meta name="theme-color" content="#000000">
   <title>Nikita Terekhin — tech lead, a one-person IT department</title>
   <meta name="description" content="Tech lead from Khabarovsk. I run the entire IT of two retail chains, 5LB and Medusa, on my own: apps, backends, CRM, 1C, websites, in-store video analytics and servers. The code is written by a team of AI agents I designed.">
   <link rel="canonical" href="https://sysrootix.com/portfolio/en/">
@@ -14,271 +14,150 @@
   <meta property="og:title" content="Nikita Terekhin — tech lead, a one-person IT department">
   <meta property="og:description" content="The entire IT of two retail chains: apps, backends, CRM, 1C, websites, AI cameras.">
   <meta property="og:url" content="https://sysrootix.com/portfolio/en/">
-  <meta property="og:image" content="https://sysrootix.com/portfolio/img/og-en.png">
+  <meta property="og:image" content="https://sysrootix.com/portfolio/img/og-en.png?v=2">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../../assets/apple-touch.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../p.css?v=5">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="modulepreload" href="../../assets/vendor/three.module.min.js">
+  <link rel="stylesheet" href="../p.css?v=6">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span></span></div>
 
-<header class="nav">
-  <div class="progress" aria-hidden="true"></div>
-  <div class="wrap nav-in">
-    <a class="logo" href="../../">sysrootix</a>
-    <nav class="nav-links" aria-label="Sections">
-      <a href="#systems">Systems</a>
-      <a href="#projects">Projects</a>
-      <a href="#results">Results</a>
-      <a href="#process">How I work</a>
-    </nav>
-    <a class="lang" href="../" hreflang="ru" lang="ru" aria-label="Русская версия">ru</a>
-    <a class="btn btn-sm" href="../resume-en.pdf" download>Résumé PDF</a>
+  <a class="home" href="../../" aria-label="sysrootix.com"><img src="../../assets/logo.svg" alt="" width="20" height="20"><span>sysrootix</span></a>
+  <div class="top-right">
+    <a class="chip" href="../" hreflang="ru" lang="ru" aria-label="Русская версия">ru</a>
+    <a class="chip chip-wide" href="../resume-en.pdf" download>résumé pdf</a>
   </div>
-</header>
+  <nav class="dots" aria-label="Sections"><a href="#top" aria-label="top"><span></span></a><a href="#about" aria-label="in short"><span></span></a><a href="#systems" aria-label="systems"><span></span></a><a href="#projects" aria-label="projects"><span></span></a><a href="#results" aria-label="results"><span></span></a><a href="#process" aria-label="how i work"><span></span></a><a href="#contact" aria-label="contact"><span></span></a></nav>
 
-<main>
-
-<section class="hero">
-  <div class="wrap hero-in">
-    <div class="hero-text">
-      <p class="status"><i></i>Open to offers</p>
-      <h1>Nikita Terekhin</h1>
-      <p class="hero-role">Tech lead. I run the entire IT of two retail chains on my own, from&nbsp;1C at the till to&nbsp;apps in&nbsp;the stores.</p>
-      <p class="hero-sub">I design, set the tasks and own production. The code is written by a team of AI agents working to my process, so one person delivers the output of a whole department.</p>
-      <div class="hero-cta">
-        <a class="btn" href="../resume-en.pdf" download>Download résumé</a>
-        <a class="btn btn-ghost" href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank">Message on Telegram</a>
+  <main>
+    <section class="hero" id="top" data-shape="0">
+      <p class="open"><i></i>open to offers</p>
+      <h1 class="hname" aria-label="Nikita Terekhin"><b class="w"><span>n</span><span>i</span><span>k</span><span>i</span><span>t</span><span>a</span></b> <b class="w"><span>t</span><span>e</span><span>r</span><span>e</span><span>k</span><span>h</span><span>i</span><span>n</span></b></h1>
+      <p class="role">tech lead / a one-person it department<span class="caret" aria-hidden="true"></span></p>
+      <p class="hero-lead">I run the entire IT of two retail chains on my own, from&nbsp;1C at&nbsp;the till to&nbsp;apps in&nbsp;the stores. The code is written by a team of AI agents working to&nbsp;my process.</p>
+      <p class="when">khabarovsk · utc+10 · remote or on site</p>
+      <div class="actions">
+        <a class="btn" href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank"><span>message on telegram</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none"/></svg></a>
+        <a class="btn btn-line" href="../resume-en.pdf" download><span>résumé pdf</span></a>
       </div>
-      <p class="hero-meta">Khabarovsk · UTC+10 · remote or on site</p>
-    </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="glow"></div>
-      <img class="mk mk-back" src="../img/hero-mda.webp" width="927" height="1800" alt="" fetchpriority="high">
-      <img class="mk mk-front" src="../img/hero-lb.webp" width="936" height="1800" alt="" fetchpriority="high">
-      <div class="mk-shadow"></div>
-    </div>
-  </div>
-</section>
+      <a class="cue" href="#about"><span>scroll</span><i aria-hidden="true"></i></a>
+    </section>
 
-<section class="wrap">
-  <dl class="stats">
-    <div><dt data-count="65000" data-suffix="+">65,000+</dt><dd>customers in two loyalty databases</dd></div>
-    <div><dt data-count="50" data-suffix="+">50+</dt><dd>stores running on my systems</dd></div>
-    <div><dt data-count="20" data-suffix="+">20+</dt><dd>systems in production</dd></div>
-    <div><dt data-count="14" data-prefix="1 → ">1 → 14</dt><dd>one person covering 14 IT roles</dd></div>
-  </dl>
-</section>
+    <section class="block" id="about" data-shape="1">
+      <p class="kicker"><b>01</b><span>in short</span></p>
+      <h2 class="title reveal">one person instead of a department</h2>
+      <p class="lead reveal">I design, set the tasks and own production. AI agents write the code to my process: tests, review, CI, deploys with auto-rollback. That's how one person delivers the output of a whole IT department.</p>
+      <div class="facts"><div class="fact reveal" style="--d:0ms"><b data-count="65000" data-prefix="" data-suffix="+">65,000+</b><span>customers in loyalty databases</span></div><div class="fact reveal" style="--d:80ms"><b data-count="50" data-prefix="" data-suffix="+">50+</b><span>stores on my systems</span></div><div class="fact reveal" style="--d:160ms"><b data-count="20" data-prefix="" data-suffix="+">20+</b><span>systems in production</span></div><div class="fact reveal" style="--d:240ms"><b data-count="14" data-prefix="" data-suffix="">14</b><span>it roles covered</span></div></div>
+      <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>backend</span><i>✦</i><span>ios</span><i>✦</i><span>mobile</span><i>✦</i><span>frontend</span><i>✦</i><span>1C</span><i>✦</i><span>bitrix</span><i>✦</i><span>analytics / bi</span><i>✦</i><span>computer vision</span><i>✦</i><span>ai engineer</span><i>✦</i><span>devops</span><i>✦</i><span>servers</span><i>✦</i><span>marketing / seo</span><i>✦</i><span>support</span><i>✦</i><span>product and design</span><i>✦</i><span>backend</span><i>✦</i><span>ios</span><i>✦</i><span>mobile</span><i>✦</i><span>frontend</span><i>✦</i><span>1C</span><i>✦</i><span>bitrix</span><i>✦</i><span>analytics / bi</span><i>✦</i><span>computer vision</span><i>✦</i><span>ai engineer</span><i>✦</i><span>devops</span><i>✦</i><span>servers</span><i>✦</i><span>marketing / seo</span><i>✦</i><span>support</span><i>✦</i><span>product and design</span><i>✦</i></div></div>
+    </section>
 
-<section class="section wrap" id="systems">
-  <div class="head">
-    <h2>A chain's entire IT as one connected system</h2>
-    <p>From the till to the app in the customer's pocket. I designed, built and run everything below myself.</p>
-  </div>
-  <div class="map">
-    <div class="tier">
-      <p class="tier-name">Channels</p>
-      <div class="nodes">
-        <div class="node"><b>Apps</b><span>iOS · Android · web</span></div>
-        <div class="node"><b>Websites</b><span>Bitrix · catalog · reservations</span></div>
-        <div class="node"><b>Telegram</b><span>Mini App · bots</span></div>
-        <div class="node"><b>Campaigns</b><span>up to 52,000 per send</span></div>
-        <div class="node"><b>Support</b><span>every channel in one inbox</span></div>
+    <section class="block" id="systems" data-shape="2">
+      <p class="kicker"><b>02</b><span>systems</span></p>
+      <h2 class="title reveal">the whole chain as one system</h2>
+      <p class="lead reveal">From the till to the app in the customer's pocket. I designed, built and run everything below myself.</p>
+      <div class="map"><div class="tier reveal" style="--d:0ms"><p class="tier-name"><b>a</b>channels</p><ul><li><b>Apps</b><span>ios · android · web</span></li><li><b>Websites</b><span>bitrix · catalog · reservations</span></li><li><b>Telegram</b><span>mini app · bots</span></li><li><b>Campaigns</b><span>up to 52,000 per send</span></li><li><b>Support</b><span>every channel in one inbox</span></li></ul></div><div class="tier tier-core reveal" style="--d:90ms"><p class="tier-name"><b>b</b>core</p><ul><li><b>Loyalty backends</b><span>rust · node · postgres</span></li><li><b>CRM + AI agent</b><span>audiences · campaigns · mcp</span></li><li><b>Staff bot</b><span>targets · battle pass · bonuses</span></li></ul></div><div class="tier reveal" style="--d:180ms"><p class="tier-name"><b>c</b>data</p><ul><li><b>1C ERP</b><span>extensions · pos · sync</span></li><li><b>In-store cameras</b><span>yolo · tensorrt</span></li><li><b>Analytics</b><span>power bi · purchasing reports</span></li><li><b>Servers</b><span>ci · auto-rollback · backups</span></li></ul></div></div>
+    </section>
+
+    <section class="block" id="projects" data-shape="2">
+      <p class="kicker"><b>03</b><span>projects</span></p>
+      <h2 class="title reveal">what i build</h2>
+      <p class="lead reveal">Two chains in production with real customers, plus my own products.</p>
+      <div class="cards">
+        
+      <article class="card wide reveal">
+        <span class="glare" aria-hidden="true"></span>
+        <div class="wide-text">
+          <span class="tag">work · sports nutrition chain</span>
+          <h3 class="name">5LB</h3>
+          <p class="text">Khabarovsk and Vladivostok. I built the chain's whole digital side: the app, loyalty bonuses, CRM, website, staff bot and the 1C integration.</p>
+          <ul class="list"><li>Expo app for iOS, Android and web with over-the-air updates</li><li>Rust backend: bonuses, prize wheel, referrals, partner program, passwordless login</li><li>CRM: RFM audiences, campaigns, automated flows, an AI agent, 820 tests</li><li>Cameras count visitors and how often staff approach them</li></ul>
+          <span class="chips"><i>rust</i><i>expo</i><i>react</i><i>postgres</i><i>1C</i><i>bitrix</i></span>
+          <span class="links"><a href="https://5lb.pro" rel="noopener noreferrer" target="_blank">5lb.pro</a><a href="https://web.5lb.pro" rel="noopener noreferrer" target="_blank">web.5lb.pro</a></span>
+        </div>
+        <div class="art art-phones"><img src="../img/p-lb-1.webp" width="680" height="1500" loading="lazy" alt="5LB app: home screen with promotions and bonuses"><img src="../img/p-lb-2.webp" width="755" height="1500" loading="lazy" alt="5LB app: sports nutrition catalog with bonuses"><img src="../img/p-lb-3.webp" width="680" height="1500" loading="lazy" alt="5LB app: product page with flavor picker"></div>
+      </article>
+        
+      <article class="card wide reveal">
+        <span class="glare" aria-hidden="true"></span>
+        <div class="wide-text">
+          <span class="tag">work · store chain and franchise</span>
+          <h3 class="name">Medusa</h3>
+          <p class="text">40+ stores in Khabarovsk. A loyalty program with 54,000 users: apps, prizes, tiers and discounts applied right at the till.</p>
+          <ul class="list"><li>Native SwiftUI iOS app with a widget and Siri, Android on Expo</li><li>Telegram Mini App and PWA, sign-in by phone or Telegram</li><li>Personal discounts flow CRM → 1C → till with no cashier involved</li><li>Staff battle pass: 15 levels, store leagues, a new-product race</li></ul>
+          <span class="chips"><i>swiftui</i><i>node</i><i>react</i><i>postgres</i><i>1C</i></span>
+          <span class="links"><a href="https://mda-medusa.ru" rel="noopener noreferrer" target="_blank">mda-medusa.ru</a><a href="https://app.mda-platform.top" rel="noopener noreferrer" target="_blank">app.mda-platform.top</a></span>
+        </div>
+        <div class="art art-phones"><img src="../img/p-mda-1.webp" width="680" height="1500" loading="lazy" alt="Medusa app: profile with tier and bonus balance"><img src="../img/p-mda-2.webp" width="755" height="1500" loading="lazy" alt="Medusa app: sign-in by phone, Telegram, VK ID or Apple"><img src="../img/p-mda-3.webp" width="680" height="1500" loading="lazy" alt="Medusa loyalty program: up to 10% back in bonuses"></div>
+      </article>
+        <div class="minis"><article class="card mini reveal" style="--d:0ms"><span class="glare" aria-hidden="true"></span><h3 class="name">CRM and AI agents</h3><p class="text">You just tell the CRM agent what you need: build an audience, launch a campaign, add product photos. It has an employee's permissions, and a human approves anything risky.</p><span class="fig">2 crms with mcp agents</span></article><article class="card mini reveal" style="--d:80ms"><span class="glare" aria-hidden="true"></span><h3 class="name">Video analytics</h3><p class="text">In-store cameras count visitors and see whether a salesperson came over. The report lands in Telegram on its own.</p><span class="fig">43 ms per frame, down from 78</span></article><article class="card mini reveal" style="--d:160ms"><span class="glare" aria-hidden="true"></span><h3 class="name">RootDesk</h3><p class="text">A shared support inbox for both chains: Telegram, WhatsApp, MAX and the website in one window, with AI-suggested replies.</p><span class="fig">410 tests in ci</span></article></div>
+        <div class="owns">
+        <a class="card own reveal" style="--d:0ms" href="https://bandito.dev" rel="noopener noreferrer" target="_blank">
+          <span class="glare" aria-hidden="true"></span>
+          <span class="art art-shot"><img src="../img/bandito.webp" width="1600" height="1000" loading="lazy" alt="Bandito landing page"></span>
+          <span class="tag">my product</span>
+          <span class="name">Bandito</span>
+          <span class="text">A team of AI agents on your Mac and server. A Rust daemon with native apps for Mac and iPhone, 20 releases in the first week.</span>
+          <span class="url">bandito.dev</span>
+          <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+        </a>
+        <a class="card own reveal" style="--d:80ms" href="https://omut.chat" rel="noopener noreferrer" target="_blank">
+          <span class="glare" aria-hidden="true"></span>
+          <span class="art art-shot"><img src="../img/omut.webp" width="1600" height="1000" loading="lazy" alt="Omut landing page"></span>
+          <span class="tag">my product</span>
+          <span class="name">Omut</span>
+          <span class="text">A messenger with Telegram, WhatsApp and its own chat in one app. Swift, TDLib and a Rust server, about 400 tests.</span>
+          <span class="url">omut.chat</span>
+          <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+        </a>
+        </div>
       </div>
-    </div>
-    <div class="tier tier-core">
-      <p class="tier-name">Core</p>
-      <div class="nodes">
-        <div class="node"><b>Loyalty backends</b><span>Rust · Node · Postgres</span></div>
-        <div class="node"><b>CRM + AI agent</b><span>audiences · campaigns · MCP</span></div>
-        <div class="node"><b>Staff bot</b><span>targets · battle pass · bonuses</span></div>
+    </section>
+
+    <section class="block" id="results" data-shape="3">
+      <p class="kicker"><b>04</b><span>results</span></p>
+      <h2 class="title reveal">results in numbers</h2>
+      <p class="lead reveal">From web analytics, 1C and logs. No company revenue figures.</p>
+      <ol class="ledger"><li class="row reveal"><span class="n">01</span><span class="v">×4</span><span class="what"><b>website reservations in a month</b><span>SEO used to be run by a paid agency. Since October an AI agent does it: articles, fixes, reports. Reservations 21 → 87, visits +18%.</span></span><span class="src">analytics</span></li><li class="row reveal"><span class="n">02</span><span class="v">+300</span><span class="what"><b>receipts a day</b><span>Found in the data why the chain's receipt count dropped: free add-on deliveries to regular customers had stopped. They came back, and so did the receipts.</span></span><span class="src">1C</span></li><li class="row reveal"><span class="n">03</span><span class="v">1.8×</span><span class="what"><b>faster video analytics</b><span>78 → 43 ms per frame, 96 frames per second on a single GPU instead of 70.</span></span><span class="src">gpu</span></li><li class="row reveal"><span class="n">04</span><span class="v">120×</span><span class="what"><b>smaller logs</b><span>60 GB → 508 MB. Tracked down an endless retry of hopeless jobs: 54 million identical errors.</span></span><span class="src">logs</span></li><li class="row reveal"><span class="n">05</span><span class="v">−58%</span><span class="what"><b>products without photos</b><span>419 → 174 of 1,308. An agent found photos on manufacturers' sites; the rest went to the team as a shot list.</span></span><span class="src">catalog</span></li><li class="row reveal"><span class="n">06</span><span class="v">20</span><span class="what"><b>repos with auto-rollback</b><span>Every change is a PR, CI and a deploy. If the post-deploy check fails, production rolls back to the previous version on its own.</span></span><span class="src">ci</span></li></ol>
+    </section>
+
+    <section class="block" id="process" data-shape="4">
+      <p class="kicker"><b>05</b><span>how i work</span></p>
+      <h2 class="title reveal">how one person runs a department</h2>
+      <p class="lead reveal">I'm the architect and I own production. A team of agents writes the code to my process, <a href="https://github.com/sysrootix/claude-agent-team" rel="noopener noreferrer" target="_blank">which is open source on GitHub ↗</a></p>
+      <ol class="steps"><li class="reveal" style="--d:0ms"><b><i>01</i>design</b><p>I work through the task with the business. Money, bonuses and 1C get thought through before any code: transactions, ordering, rollback.</p></li><li class="reveal" style="--d:70ms"><b><i>02</i>split into steps</b><p>A senior model breaks the task into steps of 1–5 files, each checked by a single command.</p></li><li class="reveal" style="--d:140ms"><b><i>03</i>agents write</b><p>Smaller models write code to the spec: tests first, then the implementation until it's green.</p></li><li class="reveal" style="--d:210ms"><b><i>04</i>review and ci</b><p>A separate agent reviews the diff, hooks block anything red, CI runs the tests.</p></li><li class="reveal" style="--d:280ms"><b><i>05</i>ship</b><p>Merge, and it's live. If the post-deploy check fails, it rolls back automatically.</p></li></ol>
+      <div class="term reveal" aria-label="Example: how one task goes">
+        <div class="term-bar"><span>~/agents</span><span>one task from request to production</span></div>
+        <ol class="term-log"><li><i>$</i>task “5LB: expire bonuses of inactive customers”</li><li><i>opus</i>plan: 3 steps, accrual in one transaction, rollback covered</li><li><i>haiku</i>step A: tests written, failing as expected</li><li><i>haiku</i>step B: implementation, all tests green</li><li><i>review</i>separate agent checked the diff, one issue fixed</li><li><i>ci</i>lint · tests · build <em>✓</em></li><li><i>deploy</i>merge → production, post-deploy check <em>ok</em></li></ol>
       </div>
-    </div>
-    <div class="tier">
-      <p class="tier-name">Data</p>
-      <div class="nodes">
-        <div class="node"><b>1C ERP</b><span>extensions · POS · sync</span></div>
-        <div class="node"><b>In-store cameras</b><span>YOLO · TensorRT</span></div>
-        <div class="node"><b>Analytics</b><span>Power BI · purchasing reports</span></div>
-        <div class="node"><b>Servers</b><span>CI · auto-rollback · backups</span></div>
+      <h3 class="sub reveal">stack</h3>
+      <dl class="stack reveal"><div><dt>languages</dt><dd>TypeScript, Rust, Swift, Python, PHP, 1C</dd></div><div><dt>backend</dt><dd>axum, sqlx, Express, Fastify, Prisma, FastAPI</dd></div><div><dt>clients</dt><dd>React, Next.js, Expo, SwiftUI, Telegram Mini Apps</dd></div><div><dt>data</dt><dd>PostgreSQL, Redis, Power BI</dd></div><div><dt>infra</dt><dd>Docker, GitHub Actions, nginx, Caddy, Cloudflare</dd></div><div><dt>ai</dt><dd>Claude API, MCP, agents, YOLO, TensorRT</dd></div></dl>
+    </section>
+
+    <section class="block contact" id="contact" data-shape="4">
+      <p class="kicker"><b>06</b><span>contact</span></p>
+      <h2 class="title title-xl reveal">looking for a tech lead or head of it role</h2>
+      <p class="lead reveal">Remote or in Khabarovsk. I reply the same day, online 10:00–23:00 Khabarovsk time (UTC+10).</p>
+      <div class="actions reveal">
+        <a class="btn" href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank"><span>message on telegram</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none"/></svg></a>
+        <a class="btn btn-line" href="../resume-en.pdf" download><span>résumé pdf</span></a>
       </div>
-    </div>
-  </div>
-</section>
+      <footer class="foot">
+        <span>© 2026 nikita terekhin</span>
+        <span><a href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank">telegram</a><a href="https://github.com/sysrootix" rel="me noopener noreferrer" target="_blank">github</a><a href="https://x.com/sysrootix" rel="me noopener noreferrer" target="_blank">x</a><a href="../../">sysrootix.com</a></span>
+      </footer>
+    </section>
+  </main>
 
-<section class="section wrap" id="projects">
-  <div class="head">
-    <h2>Projects</h2>
-    <p>Two chains in production with real customers, plus my own products.</p>
-  </div>
-
-  <article class="card proj">
-    <div class="proj-text">
-      <p class="proj-tag">Work · sports nutrition chain</p>
-      <h3>5LB</h3>
-      <p>Khabarovsk and Vladivostok. I built the chain's whole digital side: the app, loyalty bonuses, CRM, website, staff bot and the 1C integration.</p>
-      <ul class="facts">
-        <li>Expo app for iOS, Android and web with over-the-air updates</li>
-        <li>Rust backend: bonuses, prize wheel, referrals, partner program, passwordless login</li>
-        <li>CRM: RFM audiences, campaigns, automated flows, an AI agent, 820 tests</li>
-        <li>Cameras count visitors and how often staff approach them</li>
-      </ul>
-      <p class="tags"><span>Rust</span><span>Expo</span><span>React</span><span>Postgres</span><span>1C</span><span>Bitrix</span></p>
-      <p class="links"><a href="https://web.5lb.pro" rel="noopener noreferrer" target="_blank">web.5lb.pro ↗</a><a href="https://5lb.pro" rel="noopener noreferrer" target="_blank">5lb.pro ↗</a></p>
-    </div>
-    <div class="fan">
-      <img src="../img/p-lb-1.webp" width="680" height="1500" loading="lazy" alt="5LB app: home screen with promotions and bonuses">
-      <img src="../img/p-lb-2.webp" width="755" height="1500" loading="lazy" alt="5LB app: sports nutrition catalog with bonuses">
-      <img src="../img/p-lb-3.webp" width="680" height="1500" loading="lazy" alt="5LB app: product page with flavor picker">
-    </div>
-  </article>
-
-  <article class="card proj proj-alt">
-    <div class="proj-text">
-      <p class="proj-tag">Work · store chain and franchise</p>
-      <h3>Medusa</h3>
-      <p>40+ stores in Khabarovsk. A loyalty program with 54,000 users: apps, prizes, tiers and discounts applied right at the till.</p>
-      <ul class="facts">
-        <li>Native SwiftUI iOS app with a widget and Siri, Android on Expo</li>
-        <li>Telegram Mini App and PWA, sign-in by phone or Telegram</li>
-        <li>Personal discounts flow CRM → 1C → till with no cashier involved</li>
-        <li>Staff battle pass: 15 levels, store leagues, a new-product race</li>
-      </ul>
-      <p class="tags"><span>SwiftUI</span><span>Node</span><span>React</span><span>Postgres</span><span>1C</span></p>
-      <p class="links"><a href="https://app.mda-platform.top" rel="noopener noreferrer" target="_blank">app.mda-platform.top ↗</a></p>
-    </div>
-    <div class="fan">
-      <img src="../img/p-mda-1.webp" width="680" height="1500" loading="lazy" alt="Medusa app: profile with tier and bonus balance">
-      <img src="../img/p-mda-2.webp" width="755" height="1500" loading="lazy" alt="Medusa app: sign-in by phone, Telegram, VK ID or Apple">
-      <img src="../img/p-mda-3.webp" width="680" height="1500" loading="lazy" alt="Medusa loyalty program: up to 10% back in bonuses">
-    </div>
-  </article>
-
-  <div class="grid3">
-    <article class="card mini">
-      <h3>CRM and AI agents</h3>
-      <p>You just tell the CRM agent what you need: build an audience, launch a campaign, add product photos. It has an employee's permissions, and a human approves anything risky.</p>
-      <p class="mini-fig"><b>2</b> CRMs with MCP agents</p>
-    </article>
-    <article class="card mini">
-      <h3>Video analytics</h3>
-      <p>In-store cameras count visitors and see whether a salesperson came over. The report lands in Telegram on its own.</p>
-      <p class="mini-fig"><b>43 ms</b> per frame, down from 78</p>
-    </article>
-    <article class="card mini">
-      <h3>RootDesk</h3>
-      <p>A shared support inbox for both chains: Telegram, WhatsApp, MAX and the website in one window, with AI-suggested replies.</p>
-      <p class="mini-fig"><b>410</b> tests in CI</p>
-    </article>
-  </div>
-
-  <div class="grid2">
-    <article class="card own">
-      <div class="browser"><span></span><span></span><span></span></div>
-      <img src="../img/bandito.webp" width="1600" height="1000" loading="lazy" alt="Bandito landing page">
-      <div class="own-text">
-        <p class="proj-tag">My product</p>
-        <h3>Bandito</h3>
-        <p>A team of AI agents on your Mac and server. A Rust daemon with native apps for Mac and iPhone, 20 releases in the first week.</p>
-        <p class="links"><a href="https://bandito.dev" rel="noopener noreferrer" target="_blank">bandito.dev ↗</a></p>
-      </div>
-    </article>
-    <article class="card own">
-      <div class="browser"><span></span><span></span><span></span></div>
-      <img src="../img/omut.webp" width="1600" height="1000" loading="lazy" alt="Omut landing page">
-      <div class="own-text">
-        <p class="proj-tag">My product</p>
-        <h3>Omut</h3>
-        <p>A messenger with Telegram, WhatsApp and its own chat in one app. Swift, TDLib and a Rust server, about 400 tests.</p>
-        <p class="links"><a href="https://omut.chat" rel="noopener noreferrer" target="_blank">omut.chat ↗</a></p>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="section wrap" id="results">
-  <div class="head">
-    <h2>Results in numbers</h2>
-    <p>From web analytics, 1C and logs. No company revenue figures.</p>
-  </div>
-  <div class="results">
-    <article class="card res"><p class="res-fig">×4</p><h3>website reservations in a month</h3><p>SEO used to be run by a paid agency. Since October an AI agent does it: articles, fixes, reports. Reservations 21 → 87, visits +18%.</p></article>
-    <article class="card res"><p class="res-fig">+300</p><h3>receipts a day</h3><p>Found in the data why the chain's receipt count dropped: free add-on deliveries to regular customers had stopped. They came back, and so did the receipts.</p></article>
-    <article class="card res"><p class="res-fig">1.8×</p><h3>faster video analytics</h3><p>78 → 43 ms per frame, 96 frames per second on a single GPU instead of 70.</p></article>
-    <article class="card res"><p class="res-fig">120×</p><h3>smaller logs</h3><p>60 GB → 508 MB. Tracked down an endless retry of hopeless jobs: 54 million identical errors.</p></article>
-    <article class="card res"><p class="res-fig">−58%</p><h3>products without photos</h3><p>419 → 174 of 1,308. An agent found photos on manufacturers' sites; the rest went to the team as a shot list.</p></article>
-    <article class="card res"><p class="res-fig">20</p><h3>repos with auto-rollback</h3><p>Every change is a PR, CI and a deploy. If the post-deploy check fails, production rolls back to the previous version on its own.</p></article>
-  </div>
-</section>
-
-<section class="section wrap" id="process">
-  <div class="head">
-    <h2>How one person runs a department</h2>
-    <p>I'm the architect and I own production. A team of agents writes the code to my process, <a href="https://github.com/sysrootix/claude-agent-team" rel="noopener noreferrer" target="_blank">which is open source on GitHub ↗</a></p>
-  </div>
-  <ol class="steps">
-    <li class="card"><b>Design</b><p>I work through the task with the business. Money, bonuses and 1C get thought through before any code: transactions, ordering, rollback.</p></li>
-    <li class="card"><b>Split into steps</b><p>A senior model breaks the task into steps of 1–5 files, each checked by a single command.</p></li>
-    <li class="card"><b>Agents write</b><p>Smaller models write code to the spec: tests first, then the implementation until it's green.</p></li>
-    <li class="card"><b>Review and CI</b><p>A separate agent reviews the diff, hooks block anything red, CI runs the tests.</p></li>
-    <li class="card"><b>Ship</b><p>Merge, and it's live. If the post-deploy check fails, it rolls back automatically.</p></li>
-  </ol>
-  <div class="card term" aria-label="Example: how one task goes">
-    <div class="term-bar"><span></span><span></span><span></span><p>one task from request to production</p></div>
-    <ol class="term-log">
-      <li><i>$</i> task "5LB: expire bonuses of inactive customers"</li>
-      <li><i>opus</i> plan: 3 steps, accrual in one transaction, rollback covered</li>
-      <li><i>haiku</i> step A: tests written, failing as expected</li>
-      <li><i>haiku</i> step B: implementation, all tests green</li>
-      <li><i>review</i> separate agent checked the diff, one issue fixed</li>
-      <li><i>ci</i> lint · tests · build <em>✓</em></li>
-      <li><i>deploy</i> merge → production, post-deploy check <em>ok</em></li>
-    </ol>
-  </div>
-</section>
-
-<section class="section wrap two-col">
-  <div>
-    <h2 class="h-sm">Roles I cover</h2>
-    <p class="chips"><span>Backend</span><span>iOS</span><span>Mobile</span><span>Frontend</span><span>1C</span><span>Bitrix</span><span>Analytics / BI</span><span>Computer vision</span><span>AI engineer</span><span>DevOps</span><span>Servers</span><span>Marketing / SEO</span><span>Support</span><span>Product and design</span></p>
-  </div>
-  <div>
-    <h2 class="h-sm">Stack</h2>
-    <dl class="stack">
-      <div><dt>Languages</dt><dd>TypeScript, Rust, Swift, Python, PHP, 1C</dd></div>
-      <div><dt>Backend</dt><dd>axum, sqlx, Express, Fastify, Prisma, FastAPI</dd></div>
-      <div><dt>Clients</dt><dd>React, Next.js, Expo, SwiftUI, Telegram Mini Apps</dd></div>
-      <div><dt>Data</dt><dd>PostgreSQL, Redis, Power BI</dd></div>
-      <div><dt>Infra</dt><dd>Docker, GitHub Actions, nginx, Caddy, Cloudflare</dd></div>
-      <div><dt>AI</dt><dd>Claude API, MCP, agents, YOLO, TensorRT</dd></div>
-    </dl>
-  </div>
-</section>
-
-<section class="section wrap">
-  <div class="card cta">
-    <div>
-      <h2>Looking for a tech lead or head of IT role</h2>
-      <p>Remote or in Khabarovsk. I reply the same day, online 10:00–23:00 Khabarovsk time (UTC+10).</p>
-    </div>
-    <div class="cta-btns">
-      <a class="btn" href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank">Message on Telegram</a>
-      <a class="btn btn-ghost" href="../resume-en.pdf" download>Résumé PDF</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="foot wrap">
-  <p>© 2026 Nikita Terekhin</p>
-  <p><a href="https://github.com/sysrootix" rel="me noopener noreferrer" target="_blank">GitHub</a><a href="https://x.com/sysrootix" rel="me noopener noreferrer" target="_blank">X</a><a href="../../">sysrootix.com</a></p>
-</footer>
-
-<script src="../p.js?v=4" defer></script>
+  <script src="../p.js?v=5" defer></script>
+  <script type="module" src="../../scene.js?v=2"></script>
 </body>
 </html>
