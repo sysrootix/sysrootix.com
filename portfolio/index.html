@@ -22,122 +22,159 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="modulepreload" href="../assets/vendor/three.module.min.js">
-  <link rel="stylesheet" href="p.css?v=7">
+  <link rel="stylesheet" href="p.css?v=8">
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+  <a class="skip" href="#projects">смотреть кейсы</a>
   <canvas id="scene" aria-hidden="true"></canvas>
   <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
-  <div class="progress" aria-hidden="true"><span></span></div>
 
-  <a class="home" href="../" aria-label="sysrootix.com"><img src="../assets/logo.svg" alt="" width="20" height="20"><span>sysrootix</span></a>
-  <div class="top-right">
-    <a class="chip" href="en/" hreflang="en" lang="en" aria-label="English version">en</a>
-    <a class="chip chip-wide" href="resume.pdf" download>резюме pdf</a>
-  </div>
-  <nav class="dots" aria-label="Разделы"><a href="#top" aria-label="наверх"><span></span></a><a href="#about" aria-label="коротко"><span></span></a><a href="#systems" aria-label="системы"><span></span></a><a href="#projects" aria-label="проекты"><span></span></a><a href="#results" aria-label="результаты"><span></span></a><a href="#process" aria-label="как работаю"><span></span></a><a href="#contact" aria-label="связь"><span></span></a></nav>
+  <header class="bar">
+    <a class="home" href="../" aria-label="Главная sysrootix.com"><img src="../assets/logo.svg" alt="" width="20" height="20"><span>sysrootix</span></a>
+    <nav class="nav" id="nav" aria-label="Разделы"><a href="#about">обо мне</a><a href="#projects">кейсы</a><a href="#results">результаты</a><a href="#process">как работаю</a><a href="#contact">связь</a>
+      <span class="nav-extra"><a href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank">telegram ↗</a><a href="resume.pdf" download>резюме pdf</a></span>
+    </nav>
+    <div class="bar-right">
+      <a class="chip" href="en/" hreflang="en" lang="en" aria-label="English version">en</a>
+      <a class="chip chip-wide chip-pdf" href="resume.pdf" download>резюме pdf</a>
+      <button class="chip chip-wide menu-btn" type="button" aria-controls="nav" aria-expanded="false" data-open="меню" data-close="закрыть">меню</button>
+    </div>
+    <div class="progress" aria-hidden="true"><span></span></div>
+  </header>
 
   <main>
     <section class="hero" id="top" data-shape="0">
       <p class="open"><i></i>открыт к предложениям</p>
       <h1 class="hname" aria-label="Никита Терехин"><b class="w"><span>н</span><span>и</span><span>к</span><span>и</span><span>т</span><span>а</span></b> <b class="w"><span>т</span><span>е</span><span>р</span><span>е</span><span>х</span><span>и</span><span>н</span></b></h1>
-      <p class="role">техлид / it-отдел из одного человека<span class="caret" aria-hidden="true"></span></p>
-      <p class="hero-lead">Один веду весь IT двух розничных сетей — от&nbsp;1С на&nbsp;кассе до&nbsp;приложений в&nbsp;сторах. Код пишет команда AI-агентов по&nbsp;моей схеме.</p>
+      <p class="role">техлид · it-отдел из одного человека<span class="caret" aria-hidden="true"></span></p>
+      <p class="hero-lead">Один веду весь IT двух розничных сетей, 5LB и&nbsp;Medusa: приложения, лояльность, CRM, сайты и&nbsp;1С. Код пишет команда AI-агентов по&nbsp;моей схеме.</p>
       <p class="when">хабаровск · utc+10 · удалённо или на месте</p>
       <div class="actions">
-        <a class="btn" href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank"><span>написать в telegram</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none"/></svg></a>
-        <a class="btn btn-line" href="resume.pdf" download><span>резюме pdf</span></a>
+        <a class="btn" href="#projects"><span>смотреть кейсы</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none"/></svg></a>
+        <a class="btn btn-line" href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank"><span>написать в telegram</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none"/></svg></a>
       </div>
       <div class="hero-phones" aria-hidden="true">
         <img class="ph ph-l" src="img/hero-lb.webp" width="936" height="1800" alt="" fetchpriority="high">
         <img class="ph ph-r" src="img/hero-mda.webp" width="927" height="1800" alt="" fetchpriority="high">
       </div>
-      <a class="cue" href="#about"><span>листай</span><i aria-hidden="true"></i></a>
     </section>
 
     <section class="block" id="about" data-shape="1">
-      <p class="kicker"><b>01</b><span>коротко</span></p>
-      <h2 class="title reveal">один человек вместо отдела</h2>
-      <p class="lead reveal">Проектирую, ставлю задачи и отвечаю за прод. Код пишут AI-агенты по моей схеме: тесты, ревью, CI, выкат с автооткатом. Поэтому один человек выдаёт объём целого IT-отдела.</p>
-      <div class="facts"><div class="fact reveal" style="--d:0ms"><b data-count="65000" data-prefix="" data-suffix="+">65 000+</b><span>клиентов в базах лояльности</span></div><div class="fact reveal" style="--d:80ms"><b data-count="50" data-prefix="" data-suffix="+">50+</b><span>магазинов на моих системах</span></div><div class="fact reveal" style="--d:160ms"><b data-count="20" data-prefix="" data-suffix="+">20+</b><span>систем в проде</span></div><div class="fact reveal" style="--d:240ms"><b data-count="14" data-prefix="" data-suffix="">14</b><span>ролей it-отдела закрываю</span></div></div>
-      <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>бэкенд</span><i>✦</i><span>ios</span><i>✦</i><span>мобильные</span><i>✦</i><span>фронтенд</span><i>✦</i><span>1С</span><i>✦</i><span>битрикс</span><i>✦</i><span>аналитика / bi</span><i>✦</i><span>компьютерное зрение</span><i>✦</i><span>ai-инженер</span><i>✦</i><span>devops</span><i>✦</i><span>серверы</span><i>✦</i><span>маркетинг / seo</span><i>✦</i><span>поддержка</span><i>✦</i><span>продукт и дизайн</span><i>✦</i><span>бэкенд</span><i>✦</i><span>ios</span><i>✦</i><span>мобильные</span><i>✦</i><span>фронтенд</span><i>✦</i><span>1С</span><i>✦</i><span>битрикс</span><i>✦</i><span>аналитика / bi</span><i>✦</i><span>компьютерное зрение</span><i>✦</i><span>ai-инженер</span><i>✦</i><span>devops</span><i>✦</i><span>серверы</span><i>✦</i><span>маркетинг / seo</span><i>✦</i><span>поддержка</span><i>✦</i><span>продукт и дизайн</span><i>✦</i></div></div>
-    </section>
-
-    <section class="block" id="systems" data-shape="2">
-      <p class="kicker"><b>02</b><span>системы</span></p>
-      <h2 class="title reveal">вся сеть — одна система</h2>
-      <p class="lead reveal">От кассы до приложения в кармане клиента. Всё ниже я спроектировал, написал и держу в проде сам.</p>
-      <div class="map"><div class="tier reveal" style="--d:0ms"><p class="tier-name"><b>a</b>каналы</p><ul><li><b>Приложения</b><span>ios · android · веб</span></li><li><b>Сайты</b><span>bitrix · каталог · бронь</span></li><li><b>Telegram</b><span>mini app · боты</span></li><li><b>Рассылки</b><span>до 52 000 за раз</span></li><li><b>Поддержка</b><span>все каналы в одном окне</span></li></ul></div><div class="tier tier-core reveal" style="--d:90ms"><p class="tier-name"><b>b</b>ядро</p><ul><li><b>Бэкенды лояльности</b><span>rust · node · postgres</span></li><li><b>CRM + ИИ-агент</b><span>аудитории · кампании · mcp</span></li><li><b>Бот продавцов</b><span>планы · баттл-пасс · премии</span></li></ul></div><div class="tier reveal" style="--d:180ms"><p class="tier-name"><b>c</b>данные</p><ul><li><b>1С УТ 11</b><span>расширения · касса · обмен</span></li><li><b>Камеры в магазинах</b><span>yolo · tensorrt</span></li><li><b>Аналитика</b><span>power bi · отчёты закупки</span></li><li><b>Серверы</b><span>ci · автооткат · бэкапы</span></li></ul></div></div>
+      <h2 class="title reveal">один человек вместо <span class="nw">it-отдела</span></h2>
+      <p class="lead reveal">Проектирую, ставлю задачи и отвечаю за прод. Код пишут AI-агенты по моей схеме: тесты, ревью, CI, выкат с автооткатом. Поэтому один человек выдаёт объём целого отдела.</p>
+      <div class="facts"><div class="fact reveal" style="--d:0ms"><b data-count="65000" data-prefix="" data-suffix="+">65 000+</b><span>клиентов в базах лояльности</span></div><div class="fact reveal" style="--d:80ms"><b data-count="50" data-prefix="" data-suffix="+">50+</b><span>магазинов работают на моих системах</span></div><div class="fact reveal" style="--d:160ms"><b data-count="20" data-prefix="" data-suffix="+">20+</b><span>систем в проде</span></div><div class="fact reveal" style="--d:240ms"><b data-count="14" data-prefix="" data-suffix="">14</b><span>ролей IT-отдела закрываю сам</span></div></div>
+      <h3 class="sub reveal">чем могу быть полезен</h3>
+      <ul class="offers"><li class="reveal" style="--d:0ms"><h3>Техлид или руководитель IT</h3><p>Возьму на себя IT целиком: архитектуру, приоритеты, прод и разговор с бизнесом о том, что даст деньги.</p></li><li class="reveal" style="--d:90ms"><h3>Продукт под ключ</h3><p>Приложение, бэкенд, CRM, сайт и интеграция с 1С — от идеи до живых клиентов. Так сделаны 5LB и Medusa.</p></li><li class="reveal" style="--d:180ms"><h3>AI в разработке</h3><p>Поставлю команде работу с AI-агентами: ТЗ, тесты, ревью, CI и автооткат. Моя схема открыта на GitHub.</p></li></ul>
+      <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>бэкенд</span><i>·</i><span>ios</span><i>·</i><span>мобильные</span><i>·</i><span>фронтенд</span><i>·</i><span>1С</span><i>·</i><span>битрикс</span><i>·</i><span>аналитика / bi</span><i>·</i><span>компьютерное зрение</span><i>·</i><span>ai-инженер</span><i>·</i><span>devops</span><i>·</i><span>серверы</span><i>·</i><span>маркетинг / seo</span><i>·</i><span>поддержка</span><i>·</i><span>продукт и дизайн</span><i>·</i><span>бэкенд</span><i>·</i><span>ios</span><i>·</i><span>мобильные</span><i>·</i><span>фронтенд</span><i>·</i><span>1С</span><i>·</i><span>битрикс</span><i>·</i><span>аналитика / bi</span><i>·</i><span>компьютерное зрение</span><i>·</i><span>ai-инженер</span><i>·</i><span>devops</span><i>·</i><span>серверы</span><i>·</i><span>маркетинг / seo</span><i>·</i><span>поддержка</span><i>·</i><span>продукт и дизайн</span><i>·</i></div></div>
     </section>
 
     <section class="block" id="projects" data-shape="2">
-      <p class="kicker"><b>03</b><span>проекты</span></p>
-      <h2 class="title reveal">что я строю</h2>
-      <p class="lead reveal">Две сети в проде с живыми клиентами и свои продукты.</p>
-      <div class="cards">
-        
-      <article class="card wide reveal">
-        <span class="glare" aria-hidden="true"></span>
-        <div class="wide-text">
-          <span class="tag">работа · сеть спортивного питания</span>
-          <h3 class="name">5LB</h3>
-          <p class="text">Хабаровск и Владивосток. Сделал всю цифровую часть сети: приложение, бонусы, CRM, сайт, бот продавцов и связку с 1С.</p>
-          <ul class="list"><li>Приложение на Expo для iOS, Android и веба, обновления по воздуху</li><li>Rust-бэкенд: бонусы, колесо, рефералка, партнёрка, вход по коду</li><li>CRM: RFM-аудитории, рассылки, автоцепочки, ИИ-агент, 820 тестов</li><li>Камеры считают посетителей и подходы продавцов</li></ul>
-          <span class="chips"><i>rust</i><i>expo</i><i>react</i><i>postgres</i><i>1С</i><i>bitrix</i></span>
-          <span class="links"><a href="https://5lb.pro" rel="noopener noreferrer" target="_blank">5lb.pro</a><a href="https://web.5lb.pro" rel="noopener noreferrer" target="_blank">web.5lb.pro</a></span>
+      <h2 class="title reveal">кейсы</h2>
+      <p class="lead reveal">Две розничные сети в проде с живыми клиентами и два своих продукта. Всё можно открыть и потрогать.</p>
+      
+      <article class="case reveal" id="case-lb">
+        <header class="case-head">
+          <div>
+            <p class="case-tag">сеть спортивного питания · Хабаровск и Владивосток</p>
+            <h3 class="case-name">5LB</h3>
+            <p class="case-one">Вся цифровая часть сети: приложение, бонусы, CRM, сайт, бот продавцов и связка с 1С.</p>
+          </div>
+          <div class="case-links"><a class="btn btn-sm btn-line" href="https://5lb.pro" rel="noopener noreferrer" target="_blank"><span>5lb.pro</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a><a class="btn btn-sm btn-line" href="https://web.5lb.pro" rel="noopener noreferrer" target="_blank"><span>web.5lb.pro</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a></div>
+        </header>
+        <div class="case-grid">
+          <div class="viewer" data-viewer>
+            <div class="vtabs" role="tablist" aria-label="Скриншоты"><button type="button" role="tab" id="lb-t0" aria-controls="lb-s0" aria-selected="true">приложение</button><button type="button" role="tab" id="lb-t1" aria-controls="lb-s1" aria-selected="false" tabindex="-1">сайт 5lb.pro</button></div>
+            <div class="vstage"><div class="slide slide-app on" role="tabpanel" id="lb-s0" aria-labelledby="lb-t0"><button type="button" class="zoom ph-1" data-zoom="img/p-lb-1.webp" aria-label="увеличить: Приложение 5LB: главная с акциями и бонусами"><img src="img/p-lb-1.webp" width="680" height="1500" loading="lazy" alt="Приложение 5LB: главная с акциями и бонусами"></button><button type="button" class="zoom ph-2" data-zoom="img/p-lb-2.webp" aria-label="увеличить: Приложение 5LB: каталог спортивного питания с бонусами"><img src="img/p-lb-2.webp" width="755" height="1500" loading="lazy" alt="Приложение 5LB: каталог спортивного питания с бонусами"></button><button type="button" class="zoom ph-3" data-zoom="img/p-lb-3.webp" aria-label="увеличить: Приложение 5LB: карточка товара с выбором вкуса"><img src="img/p-lb-3.webp" width="680" height="1500" loading="lazy" alt="Приложение 5LB: карточка товара с выбором вкуса"></button></div><div class="slide slide-site" role="tabpanel" id="lb-s1" aria-labelledby="lb-t1">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>5lb.pro</span></div>
+              <button type="button" class="zoom" data-zoom="img/site-lb.webp" aria-label="увеличить: Сайт 5lb.pro: главная с каталогом"><img src="img/site-lb.webp" width="1440" height="900" loading="lazy" alt="Сайт 5lb.pro: главная с каталогом"></button></div>
+            </div></div>
+            <p class="vhint">нажмите на скриншот, чтобы увеличить</p>
+          </div>
+          <div class="case-text">
+            <p class="label">задача</p>
+            <p class="case-task">Дать сети своё приложение с бонусами и онлайн-заказом, маркетингу — CRM, и связать всё это с кассой и складом в 1С.</p>
+            <p class="label">что сделал</p>
+            <ul class="list"><li>Приложение на Expo для iOS, Android и веба, обновления по воздуху</li><li>Rust-бэкенд: бонусы, колесо призов, рефералка, партнёрка, вход по коду</li><li>CRM: RFM-аудитории, рассылки, автоцепочки и ИИ-агент</li><li>Сайт на Bitrix: каталог, бронь и оплата по ссылке СБП</li><li>Камеры в магазинах считают посетителей и подходы продавцов</li></ul>
+            <p class="label">в цифрах</p>
+            <div class="nums"><div><b>2</b><span>города</span></div><div><b>3</b><span>платформы у одного приложения</span></div><div><b>820</b><span>тестов в CRM</span></div></div>
+            <p class="chips"><i>rust</i><i>expo</i><i>react</i><i>postgres</i><i>1С</i><i>bitrix</i></p>
+          </div>
         </div>
-        <div class="art art-phones"><img src="img/p-lb-1.webp" width="680" height="1500" loading="lazy" alt="Приложение 5LB: главная с акциями и бонусами"><img src="img/p-lb-2.webp" width="755" height="1500" loading="lazy" alt="Приложение 5LB: каталог спортивного питания с бонусами"><img src="img/p-lb-3.webp" width="680" height="1500" loading="lazy" alt="Приложение 5LB: карточка товара с выбором вкуса"></div>
       </article>
-        
-      <article class="card wide reveal">
-        <span class="glare" aria-hidden="true"></span>
-        <div class="wide-text">
-          <span class="tag">работа · сеть магазинов и франшиза</span>
-          <h3 class="name">Medusa</h3>
-          <p class="text">40+ магазинов в Хабаровске. Программа лояльности на 54 000 пользователей: приложения, призы, статусы и скидки прямо на кассе.</p>
-          <ul class="list"><li>Нативный iOS на SwiftUI с виджетом и Siri, Android на Expo</li><li>Telegram Mini App и PWA, вход по телефону или Telegram</li><li>Персональные скидки: CRM → 1С → касса, без участия кассира</li><li>Баттл-пасс продавцов: 15 уровней, лиги точек, гонка новинок</li></ul>
-          <span class="chips"><i>swiftui</i><i>node</i><i>react</i><i>postgres</i><i>1С</i></span>
-          <span class="links"><a href="https://mda-medusa.ru" rel="noopener noreferrer" target="_blank">mda-medusa.ru</a><a href="https://app.mda-platform.top" rel="noopener noreferrer" target="_blank">app.mda-platform.top</a></span>
+      
+      <article class="case reveal" id="case-mda">
+        <header class="case-head">
+          <div>
+            <p class="case-tag">сеть магазинов и франшиза · Хабаровск</p>
+            <h3 class="case-name">Medusa</h3>
+            <p class="case-one">Программа лояльности сети: приложения, призы, статусы и персональные скидки прямо на кассе.</p>
+          </div>
+          <div class="case-links"><a class="btn btn-sm btn-line" href="https://mda-medusa.ru" rel="noopener noreferrer" target="_blank"><span>mda-medusa.ru</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a><a class="btn btn-sm btn-line" href="https://app.mda-platform.top" rel="noopener noreferrer" target="_blank"><span>app.mda-platform.top</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a></div>
+        </header>
+        <div class="case-grid">
+          <div class="viewer" data-viewer>
+            <div class="vtabs" role="tablist" aria-label="Скриншоты"><button type="button" role="tab" id="mda-t0" aria-controls="mda-s0" aria-selected="true">приложение</button><button type="button" role="tab" id="mda-t1" aria-controls="mda-s1" aria-selected="false" tabindex="-1">сайт</button><button type="button" role="tab" id="mda-t2" aria-controls="mda-s2" aria-selected="false" tabindex="-1">веб-версия</button></div>
+            <div class="vstage"><div class="slide slide-app on" role="tabpanel" id="mda-s0" aria-labelledby="mda-t0"><button type="button" class="zoom ph-1" data-zoom="img/p-mda-1.webp" aria-label="увеличить: Приложение Medusa: профиль со статусом и балансом бонусов"><img src="img/p-mda-1.webp" width="680" height="1500" loading="lazy" alt="Приложение Medusa: профиль со статусом и балансом бонусов"></button><button type="button" class="zoom ph-2" data-zoom="img/p-mda-2.webp" aria-label="увеличить: Приложение Medusa: вход по телефону, Telegram, VK ID или Apple"><img src="img/p-mda-2.webp" width="755" height="1500" loading="lazy" alt="Приложение Medusa: вход по телефону, Telegram, VK ID или Apple"></button><button type="button" class="zoom ph-3" data-zoom="img/p-mda-3.webp" aria-label="увеличить: Программа лояльности Medusa: возвращаем до 10% бонусами"><img src="img/p-mda-3.webp" width="680" height="1500" loading="lazy" alt="Программа лояльности Medusa: возвращаем до 10% бонусами"></button></div><div class="slide slide-site" role="tabpanel" id="mda-s1" aria-labelledby="mda-t1">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>mda-medusa.ru</span></div>
+              <button type="button" class="zoom" data-zoom="img/site-mda.webp" aria-label="увеличить: Сайт mda-medusa.ru: главная"><img src="img/site-mda.webp" width="1440" height="900" loading="lazy" alt="Сайт mda-medusa.ru: главная"></button></div>
+            </div><div class="slide slide-site" role="tabpanel" id="mda-s2" aria-labelledby="mda-t2">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>app.mda-platform.top</span></div>
+              <button type="button" class="zoom" data-zoom="img/web-mda.webp" aria-label="увеличить: Лендинг приложения app.mda-platform.top"><img src="img/web-mda.webp" width="1440" height="900" loading="lazy" alt="Лендинг приложения app.mda-platform.top"></button></div>
+            </div></div>
+            <p class="vhint">нажмите на скриншот, чтобы увеличить</p>
+          </div>
+          <div class="case-text">
+            <p class="label">задача</p>
+            <p class="case-task">Чтобы клиент копил бонусы и получал скидки в приложении, а касса применяла их сама, без участия кассира.</p>
+            <p class="label">что сделал</p>
+            <ul class="list"><li>Нативный iOS на SwiftUI с виджетом и Siri, Android на Expo</li><li>Telegram Mini App и PWA, вход по телефону или через Telegram</li><li>Персональные скидки: CRM → 1С → касса</li><li>Баттл-пасс продавцов: 15 уровней, лиги точек, гонка новинок</li><li>Сайт сети и лендинг приложения</li></ul>
+            <p class="label">в цифрах</p>
+            <div class="nums"><div><b>40+</b><span>магазинов</span></div><div><b>54 000</b><span>в программе лояльности</span></div><div><b>15</b><span>уровней баттл-пасса</span></div></div>
+            <p class="chips"><i>swiftui</i><i>expo</i><i>node</i><i>react</i><i>postgres</i><i>1С</i></p>
+          </div>
         </div>
-        <div class="art art-phones"><img src="img/p-mda-1.webp" width="680" height="1500" loading="lazy" alt="Приложение Medusa: профиль со статусом и балансом бонусов"><img src="img/p-mda-2.webp" width="755" height="1500" loading="lazy" alt="Приложение Medusa: вход по телефону, Telegram, VK ID или Apple"><img src="img/p-mda-3.webp" width="680" height="1500" loading="lazy" alt="Программа лояльности Medusa: возвращаем до 10% бонусами"></div>
       </article>
-        <div class="minis"><article class="card mini reveal" style="--d:0ms"><span class="glare" aria-hidden="true"></span><h3 class="name">CRM и ИИ-агенты</h3><p class="text">Агенту в CRM можно просто написать задачу: собрать аудиторию, запустить рассылку, залить фото товаров. Права как у сотрудника, опасное подтверждает человек.</p><span class="fig">2 crm с mcp-агентами</span></article><article class="card mini reveal" style="--d:80ms"><span class="glare" aria-hidden="true"></span><h3 class="name">Видеоаналитика</h3><p class="text">Камеры в магазинах считают посетителей и видят, подошёл ли продавец. Отчёт сам приходит в Telegram.</p><span class="fig">43 мс на кадр вместо 78</span></article><article class="card mini reveal" style="--d:160ms"><span class="glare" aria-hidden="true"></span><h3 class="name">RootDesk</h3><p class="text">Общий inbox поддержки обеих сетей: Telegram, WhatsApp, MAX и сайт в одном окне, с ИИ-подсказками ответов.</p><span class="fig">410 тестов в ci</span></article></div>
-        <div class="owns">
-        <a class="card own reveal" style="--d:0ms" href="https://bandito.dev" rel="noopener noreferrer" target="_blank">
-          <span class="glare" aria-hidden="true"></span>
-          <span class="art art-shot"><img src="img/bandito.webp" width="1600" height="1000" loading="lazy" alt="Лендинг Bandito"></span>
-          <span class="tag">свой продукт</span>
-          <span class="name">Bandito</span>
-          <span class="text">Команда AI-агентов на вашем Mac и сервере. Rust-демон и нативные приложения для Mac и iPhone, 20 релизов за первую неделю.</span>
-          <span class="url">bandito.dev</span>
-          <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+      <h3 class="sub reveal">ещё системы в проде</h3>
+      <ul class="more"><li class="reveal" style="--d:0ms"><p class="more-fig"><b>2</b><span>CRM с MCP-агентами</span></p><h4>CRM и ИИ-агенты</h4><p>Агенту в CRM можно просто написать задачу: собрать аудиторию, запустить рассылку, залить фото товаров. Права как у сотрудника, опасное подтверждает человек.</p></li><li class="reveal" style="--d:80ms"><p class="more-fig"><b>43 мс</b><span>на кадр вместо 78</span></p><h4>Видеоаналитика</h4><p>Камеры в магазинах считают посетителей и видят, подошёл ли продавец. Отчёт сам приходит в Telegram.</p></li><li class="reveal" style="--d:160ms"><p class="more-fig"><b>410</b><span>тестов в CI</span></p><h4>RootDesk</h4><p>Общий inbox поддержки обеих сетей: Telegram, WhatsApp, MAX и сайт в одном окне, с ИИ-подсказками ответов.</p></li></ul>
+      <h3 class="sub reveal">свои продукты</h3>
+      <div class="owns">
+        <a class="own reveal" style="--d:0ms" href="https://bandito.dev" rel="noopener noreferrer" target="_blank">
+          <span class="own-shot"><img src="img/bandito.webp" width="1600" height="1000" loading="lazy" alt="Лендинг Bandito"></span>
+          <span class="own-body">
+            <span class="own-name">Bandito</span>
+            <span class="own-text">Команда AI-агентов на вашем Mac и сервере. Rust-демон и нативные приложения для Mac и iPhone, 20 релизов за первую неделю.</span>
+            <span class="own-go">открыть bandito.dev<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></span>
+          </span>
         </a>
-        <a class="card own reveal" style="--d:80ms" href="https://omut.chat" rel="noopener noreferrer" target="_blank">
-          <span class="glare" aria-hidden="true"></span>
-          <span class="art art-shot"><img src="img/omut.webp" width="1600" height="1000" loading="lazy" alt="Лендинг Omut"></span>
-          <span class="tag">свой продукт</span>
-          <span class="name">Omut</span>
-          <span class="text">Мессенджер: Telegram, WhatsApp и свой чат в одном приложении. Swift, TDLib и Rust-сервер, около 400 тестов.</span>
-          <span class="url">omut.chat</span>
-          <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg>
+        <a class="own reveal" style="--d:80ms" href="https://omut.chat" rel="noopener noreferrer" target="_blank">
+          <span class="own-shot"><img src="img/omut.webp" width="1600" height="1000" loading="lazy" alt="Лендинг Omut"></span>
+          <span class="own-body">
+            <span class="own-name">Omut</span>
+            <span class="own-text">Мессенджер: Telegram, WhatsApp и свой чат в одном приложении. Swift, TDLib и Rust-сервер, около 400 тестов.</span>
+            <span class="own-go">открыть omut.chat<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></span>
+          </span>
         </a>
-        </div>
       </div>
     </section>
 
     <section class="block" id="results" data-shape="3">
-      <p class="kicker"><b>04</b><span>результаты</span></p>
       <h2 class="title reveal">результаты в цифрах</h2>
       <p class="lead reveal">Из Метрики, 1С и логов. Без выручки компаний.</p>
-      <ol class="ledger"><li class="row reveal"><span class="n">01</span><span class="v">×4</span><span class="what"><b>броней с сайта за месяц</b><span>SEO раньше вела платная компания. С октября — ИИ-агент: статьи, правки, отчёты. Брони 21 → 87, визиты +18%.</span></span><span class="src">метрика</span></li><li class="row reveal"><span class="n">02</span><span class="v">+300</span><span class="what"><b>чеков в день</b><span>Нашёл по данным, почему чеки сети просели: перестали развозить бесплатную добавку постоянным клиентам. Вернули — чеки вернулись.</span></span><span class="src">1С</span></li><li class="row reveal"><span class="n">03</span><span class="v">1,8×</span><span class="what"><b>быстрее видеоаналитика</b><span>Кадр 78 → 43 мс, 96 кадров в секунду на одной видеокарте вместо 70.</span></span><span class="src">gpu</span></li><li class="row reveal"><span class="n">04</span><span class="v">120×</span><span class="what"><b>меньше логов</b><span>60 ГБ → 508 МБ. Нашёл вечный повтор безнадёжных операций — 54 миллиона одинаковых ошибок.</span></span><span class="src">логи</span></li><li class="row reveal"><span class="n">05</span><span class="v">−58%</span><span class="what"><b>товаров без фото</b><span>419 → 174 из 1 308. Агент сам нашёл фото у производителей, остальное ушло списком на съёмку.</span></span><span class="src">каталог</span></li><li class="row reveal"><span class="n">06</span><span class="v">20</span><span class="what"><b>репозиториев с автооткатом</b><span>Каждая правка — PR, CI и выкат. Если проверка после выката падает, прод сам возвращается на прошлую версию.</span></span><span class="src">ci</span></li></ol>
+      <ol class="ledger"><li class="row reveal"><span class="v">×4</span><span class="what"><b>броней с сайта за месяц</b><span>SEO раньше вела платная компания. С октября — ИИ-агент: статьи, правки, отчёты. Брони 21 → 87, визиты +18%.</span></span><span class="src">метрика</span></li><li class="row reveal"><span class="v">+300</span><span class="what"><b>чеков в день</b><span>Нашёл по данным, почему чеки сети просели: перестали развозить бесплатную добавку постоянным клиентам. Вернули — чеки вернулись.</span></span><span class="src">1С</span></li><li class="row reveal"><span class="v">1,8×</span><span class="what"><b>быстрее видеоаналитика</b><span>Кадр 78 → 43 мс, 96 кадров в секунду на одной видеокарте вместо 70.</span></span><span class="src">gpu</span></li><li class="row reveal"><span class="v">120×</span><span class="what"><b>меньше логов</b><span>60 ГБ → 508 МБ. Нашёл вечный повтор безнадёжных операций — 54 миллиона одинаковых ошибок.</span></span><span class="src">логи</span></li><li class="row reveal"><span class="v">−58%</span><span class="what"><b>товаров без фото</b><span>419 → 174 из 1 308. Агент сам нашёл фото у производителей, остальное ушло списком на съёмку.</span></span><span class="src">каталог</span></li><li class="row reveal"><span class="v">20</span><span class="what"><b>репозиториев с автооткатом</b><span>Каждая правка — PR, CI и выкат. Если проверка после выката падает, прод сам возвращается на прошлую версию.</span></span><span class="src">ci</span></li></ol>
+    </section>
+
+    <section class="block" id="systems" data-shape="1">
+      <h2 class="title reveal">вся сеть — одна система</h2>
+      <p class="lead reveal">От кассы до приложения в кармане клиента. Всё ниже я спроектировал, написал и держу в проде сам.</p>
+      <div class="map"><div class="tier reveal" style="--d:0ms"><p class="tier-name">каналы</p><ul><li><b>Приложения</b><span>ios · android · веб</span></li><li><b>Сайты</b><span>bitrix · каталог · бронь</span></li><li><b>Telegram</b><span>mini app · боты</span></li><li><b>Рассылки</b><span>до 52 000 за раз</span></li><li><b>Поддержка</b><span>все каналы в одном окне</span></li></ul></div><div class="tier tier-core reveal" style="--d:90ms"><p class="tier-name">ядро</p><ul><li><b>Бэкенды лояльности</b><span>rust · node · postgres</span></li><li><b>CRM + ИИ-агент</b><span>аудитории · кампании · mcp</span></li><li><b>Бот продавцов</b><span>планы · баттл-пасс · премии</span></li></ul></div><div class="tier reveal" style="--d:180ms"><p class="tier-name">данные</p><ul><li><b>1С УТ 11</b><span>расширения · касса · обмен</span></li><li><b>Камеры в магазинах</b><span>yolo · tensorrt</span></li><li><b>Аналитика</b><span>power bi · отчёты закупки</span></li><li><b>Серверы</b><span>ci · автооткат · бэкапы</span></li></ul></div></div>
     </section>
 
     <section class="block" id="process" data-shape="4">
-      <p class="kicker"><b>05</b><span>как работаю</span></p>
       <h2 class="title reveal">как один человек тянет отдел</h2>
       <p class="lead reveal">Я — архитектор и отвечаю за прод. Код пишет команда агентов по моей схеме, <a href="https://github.com/sysrootix/claude-agent-team" rel="noopener noreferrer" target="_blank">она открыта на GitHub ↗</a></p>
-      <ol class="steps"><li class="reveal" style="--d:0ms"><b><i>01</i>проектирую</b><p>Разбираю задачу с бизнесом. Деньги, бонусы и 1С продумываю до кода: транзакции, порядок, откат.</p></li><li class="reveal" style="--d:70ms"><b><i>02</i>режу на шаги</b><p>Старшая модель делит задачу на шаги по 1–5 файлов, каждый проверяется одной командой.</p></li><li class="reveal" style="--d:140ms"><b><i>03</i>агенты пишут</b><p>Младшие модели пишут код по ТЗ: сначала тесты, потом реализация до зелёного.</p></li><li class="reveal" style="--d:210ms"><b><i>04</i>ревью и ci</b><p>Отдельный агент проверяет diff, хуки не дают сдать красное, CI гоняет тесты.</p></li><li class="reveal" style="--d:280ms"><b><i>05</i>выкат</b><p>Merge — и в проде. Упала проверка после выката — автооткат.</p></li></ol>
+      <ol class="steps"><li class="reveal" style="--d:0ms"><b><i>1</i>проектирую</b><p>Разбираю задачу с бизнесом. Деньги, бонусы и 1С продумываю до кода: транзакции, порядок, откат.</p></li><li class="reveal" style="--d:70ms"><b><i>2</i>режу на шаги</b><p>Старшая модель делит задачу на шаги по 1–5 файлов, каждый проверяется одной командой.</p></li><li class="reveal" style="--d:140ms"><b><i>3</i>агенты пишут</b><p>Младшие модели пишут код по ТЗ: сначала тесты, потом реализация до зелёного.</p></li><li class="reveal" style="--d:210ms"><b><i>4</i>ревью и ci</b><p>Отдельный агент проверяет diff, хуки не дают сдать красное, CI гоняет тесты.</p></li><li class="reveal" style="--d:280ms"><b><i>5</i>выкат</b><p>Merge — и в проде. Упала проверка после выката — автооткат.</p></li></ol>
       <div class="term reveal" aria-label="Пример: как проходит одна задача">
         <div class="term-bar"><span>~/agents</span><span>одна задача от постановки до прода</span></div>
         <ol class="term-log"><li><i>$</i>задача «5LB: бонусы сгорают у неактивных клиентов»</li><li><i>opus</i>план: 3 шага, начисление в одной транзакции, откат продуман</li><li><i>haiku</i>шаг A: тесты написаны, падают как надо</li><li><i>haiku</i>шаг B: реализация, все тесты зелёные</li><li><i>review</i>отдельный агент проверил diff, одно замечание исправлено</li><li><i>ci</i>lint · тесты · сборка <em>✓</em></li><li><i>deploy</i>merge → прод, проверка после выката <em>ok</em></li></ol>
@@ -147,13 +184,13 @@
     </section>
 
     <section class="block contact" id="contact" data-shape="4">
-      <p class="kicker"><b>06</b><span>связь</span></p>
-      <h2 class="title title-xl reveal">ищу роль техлида или руководителя it</h2>
-      <p class="lead reveal">Удалённо или в Хабаровске. Отвечаю в тот же день, на связи 10:00–23:00 по Хабаровску.</p>
+      <h2 class="title title-xl reveal">ищу роль техлида</h2>
+      <p class="lead reveal">Или руководителя IT. Удалённо или в Хабаровске. Отвечаю в тот же день, на связи 10:00–23:00 по Хабаровску.</p>
       <div class="actions reveal">
         <a class="btn" href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank"><span>написать в telegram</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none"/></svg></a>
         <a class="btn btn-line" href="resume.pdf" download><span>резюме pdf</span></a>
       </div>
+      <ul class="contacts reveal" aria-label="Контакты"><li><a href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank"><span>telegram</span><b>@sysrootix</b><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a></li><li><a href="https://github.com/sysrootix" rel="noopener noreferrer" target="_blank"><span>github</span><b>github.com/sysrootix</b><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a></li><li><a href="resume.pdf" download><span>резюме</span><b>pdf, русский</b><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a></li><li><a href="resume-en.pdf" download><span>resume</span><b>pdf, english</b><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7" fill="none"/></svg></a></li></ul>
       <footer class="foot">
         <span>© 2026 никита терехин</span>
         <span><a href="https://t.me/sysrootix" rel="noopener noreferrer" target="_blank">telegram</a><a href="https://github.com/sysrootix" rel="me noopener noreferrer" target="_blank">github</a><a href="https://x.com/sysrootix" rel="me noopener noreferrer" target="_blank">x</a><a href="../">sysrootix.com</a></span>
@@ -161,7 +198,12 @@
     </section>
   </main>
 
-  <script src="p.js?v=5" defer></script>
+  <dialog class="lb" aria-label="увеличить">
+    <form method="dialog"><button class="lb-close" aria-label="Закрыть">×</button></form>
+    <img alt="">
+  </dialog>
+
+  <script src="p.js?v=6" defer></script>
   <script type="module" src="../scene.js?v=2"></script>
 </body>
 </html>
