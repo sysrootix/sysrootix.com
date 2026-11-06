@@ -33,7 +33,7 @@ Don't publish client-internal numbers, client contacts, server addresses or anyt
 - Rebuild the PDF after editing `resume.html` (must stay one A4 page): `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=5000 --print-to-pdf=$PWD/resume.pdf "file://$PWD/resume.html"` from `portfolio/`.
 - Phone mockups `img/hero-*.webp`, `img/p-*.webp` are renders of the three.js iPhone from `~/promo-kit/template/render/scene/phone3d.js` with real app screens (transparent webp). Only clean screens: no products without photos, no placeholder pictures, no card numbers/QR, status bar drawn when the screenshot has none.
 - Company numbers on the page were approved by the owner on 02.11.2026. Never publish the absolute check counts (the 1 010 → 857 drop); only "+300 чеков в день".
-- Page design: Linear/Apple-style structure, real screens only; check by scrolling at 1512×860 and 390×844 before showing.
+- Page design (06.11.2026): same style as the main page — black + cream, fonts Unbounded / Space Grotesk / JetBrains Mono, lowercase UI, kicker `0N · section`, gradient titles, `.card` panels, and the same particle sigil (`../scene.js` on `<canvas id="scene">`, sections carry `data-shape`, scene.js sets `html[data-sec]` accents). Results are a ledger of rows, not a card grid. `/portfolio/en/` mirrors the Russian markup one to one. Real screens only; check by scrolling at 1512×860 and 390×844 before showing.
 
 ## Site structure
 
